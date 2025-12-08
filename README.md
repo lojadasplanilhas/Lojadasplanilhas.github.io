@@ -1,4 +1,6 @@
-
+h1.page-title {
+    display: none;
+}
 <html lang="pt-BR">
 <head>
     <meta charset="UTF-8">
