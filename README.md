@@ -1,1 +1,364 @@
 # Lojadasplanilhas.github.io
+
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard Pro 2.0 - A Planilha Definitiva</title>
+    <meta name="description" content="Transforme seus dados em lucro com a planilha mais completa do mercado.">
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700;900&display=swap" rel="stylesheet">
+
+    <style>
+        /* --- RESET & VARIAVEIS GERAIS --- */
+        :root {
+            --primary: #10B981; /* Verde "Sucesso/Excel" */
+            --primary-dark: #059669;
+            --secondary: #1F2937; /* Cinza Escuro Premium */
+            --text-main: #374151;
+            --text-light: #6B7280;
+            --bg-light: #F9FAFB;
+            --white: #ffffff;
+            --accent: #F59E0B; /* Laranja para avisos/estrelas */
+            --radius: 12px;
+            --shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: 'Inter', sans-serif; line-height: 1.6; color: var(--text-main); background-color: var(--white); }
+        img { max-width: 100%; display: block; }
+        a { text-decoration: none; transition: 0.3s; }
+        ul { list-style: none; }
+
+        /* --- TIPOGRAFIA --- */
+        h1, h2, h3 { color: var(--secondary); font-weight: 800; line-height: 1.2; }
+        h1 { font-size: 2.5rem; letter-spacing: -1px; margin-bottom: 1rem; }
+        h2 { font-size: 2rem; margin-bottom: 1rem; text-align: center; }
+        p { margin-bottom: 1rem; font-size: 1.1rem; }
+        .highlight { color: var(--primary); }
+        .text-center { text-align: center; }
+        
+        /* --- COMPONENTES --- */
+        .container { max-width: 1100px; margin: 0 auto; padding: 0 20px; }
+        
+        .btn {
+            display: inline-block;
+            background-color: var(--primary);
+            color: var(--white);
+            padding: 18px 36px;
+            border-radius: 50px;
+            font-weight: 700;
+            font-size: 1.2rem;
+            text-transform: uppercase;
+            box-shadow: 0 4px 14px rgba(16, 185, 129, 0.4);
+            cursor: pointer;
+            border: none;
+            width: 100%;
+            max-width: 350px;
+            text-align: center;
+        }
+        .btn:hover { background-color: var(--primary-dark); transform: translateY(-2px); }
+        .btn-secondary { background-color: transparent; border: 2px solid var(--primary); color: var(--primary); }
+        .btn-secondary:hover { background-color: var(--primary); color: var(--white); }
+
+        .section { padding: 80px 0; }
+        .bg-gray { background-color: var(--bg-light); }
+
+        /* --- HEADER & HERO --- */
+        header { background: var(--secondary); color: white; padding: 15px 0; font-size: 0.9rem; text-align: center; }
+        
+        .hero { 
+            padding: 80px 0 60px; 
+            text-align: center; 
+            background: radial-gradient(circle at center, #f0fdf4 0%, #ffffff 70%);
+        }
+        .hero-badge {
+            background: #d1fae5; color: #065f46; padding: 5px 15px; 
+            border-radius: 20px; font-size: 0.85rem; font-weight: 700; 
+            text-transform: uppercase; display: inline-block; margin-bottom: 20px;
+        }
+        .hero-sub { font-size: 1.25rem; color: var(--text-light); max-width: 700px; margin: 0 auto 40px; }
+        
+        /* Mockup da Planilha (CSS Puro para placeholder) */
+        .mockup-container {
+            margin-top: 50px;
+            position: relative;
+            z-index: 10;
+        }
+        .mockup {
+            background: white; border-radius: 12px;
+            box-shadow: 0 20px 40px -10px rgba(0,0,0,0.2);
+            border: 1px solid #e5e7eb; overflow: hidden;
+        }
+
+        /* --- PROBLEMA & SOLUÇÃO --- */
+        .problem-box {
+            background: #FEF2F2; border-left: 5px solid #EF4444; padding: 30px; 
+            margin: 20px 0; border-radius: 0 12px 12px 0;
+        }
+        .grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 60px; align-items: center; }
+
+        /* --- RECURSOS (ICONS) --- */
+        .features-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 30px; margin-top: 50px; }
+        .feature-card { background: white; padding: 30px; border-radius: var(--radius); box-shadow: var(--shadow); transition: 0.3s; }
+        .feature-card:hover { transform: translateY(-5px); }
+        .icon { width: 50px; height: 50px; background: #ecfdf5; color: var(--primary); display: flex; align-items: center; justify-content: center; border-radius: 12px; font-size: 1.5rem; margin-bottom: 20px; }
+
+        /* --- PRICING (3 OFERTAS) --- */
+        .pricing-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 20px; align-items: flex-start; margin-top: 60px; }
+        .price-card { 
+            background: white; padding: 40px 30px; border-radius: 20px; 
+            border: 1px solid #e5e7eb; text-align: center; position: relative;
+        }
+        .price-card.popular { 
+            border: 2px solid var(--primary); 
+            box-shadow: 0 25px 50px -12px rgba(16, 185, 129, 0.25); 
+            transform: scale(1.05); z-index: 2; 
+        }
+        .popular-badge {
+            position: absolute; top: -15px; left: 50%; transform: translateX(-50%);
+            background: var(--primary); color: white; padding: 5px 20px;
+            border-radius: 20px; font-weight: 700; font-size: 0.9rem;
+        }
+        .price { font-size: 3rem; font-weight: 800; color: var(--secondary); margin: 20px 0 5px; }
+        .price span { font-size: 1rem; color: var(--text-light); font-weight: 400; }
+        .old-price { text-decoration: line-through; color: #9CA3AF; }
+        .benefits-list { text-align: left; margin: 30px 0; }
+        .benefits-list li { margin-bottom: 12px; display: flex; align-items: center; gap: 10px; font-size: 0.95rem; }
+        .check { color: var(--primary); font-weight: bold; }
+        .cross { color: #EF4444; }
+
+        /* --- FAQ --- */
+        .faq-item { border-bottom: 1px solid #e5e7eb; padding: 20px 0; }
+        .faq-question { font-weight: 700; cursor: pointer; display: flex; justify-content: space-between; align-items: center; }
+        .faq-answer { display: none; margin-top: 15px; color: var(--text-light); }
+        .faq-item.active .faq-answer { display: block; }
+
+        /* --- GARANTIA --- */
+        .guarantee { background: #fff; border: 2px dashed var(--secondary); padding: 40px; border-radius: var(--radius); text-align: center; max-width: 800px; margin: 0 auto; }
+
+        /* --- FOOTER & STICKY CTA --- */
+        footer { background: var(--secondary); color: white; padding: 50px 0; text-align: center; font-size: 0.9rem; }
+        footer a { color: #9CA3AF; }
+        
+        .sticky-cta {
+            display: none; position: fixed; bottom: 0; left: 0; width: 100%;
+            background: white; padding: 15px; box-shadow: 0 -5px 15px rgba(0,0,0,0.1);
+            z-index: 100; text-align: center; border-top: 1px solid #eee;
+        }
+
+        /* --- RESPONSIVIDADE --- */
+        @media (max-width: 768px) {
+            h1 { font-size: 2rem; }
+            .grid-2 { grid-template-columns: 1fr; gap: 30px; }
+            .price-card.popular { transform: scale(1); }
+            .sticky-cta { display: block; }
+            body { padding-bottom: 80px; } /* Espaço para o sticky button */
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        🔥 Oferta Limitada: Economize 60% apenas hoje até as 23:59!
+    </header>
+
+    <section class="hero">
+        <div class="container">
+            <div class="hero-badge">Novo Lançamento 2025</div>
+            <h1>A Planilha que <span class="highlight">Automatiza Seu Financeiro</span><br> e Economiza 20h/Semana</h1>
+            <p class="hero-sub">Abandone a confusão. Tenha clareza total dos seus números com o Dashboard Pro 2.0. Não exige conhecimento avançado em Excel.</p>
+            
+            <a href="#ofertas" class="btn">Quero Meu Acesso Agora</a>
+            <p style="font-size: 0.85rem; color: #6B7280; margin-top: 10px;">🔒 Pagamento Único • Acesso Vitalício</p>
+
+            <div class="mockup-container">
+                <div class="mockup">
+                    <img src="https://via.placeholder.com/1000x550/f3f4f6/10B981?text=Imagem+Alta+Qualidade+do+Dashboard+(1000x550px)" alt="Dashboard Preview">
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <div class="section bg-gray" style="padding: 20px 0; text-align: center;">
+        <div class="container">
+            <p style="font-size: 0.9rem; color: #9CA3AF; text-transform: uppercase; letter-spacing: 1px;">Ferramenta utilizada por profissionais de:</p>
+            <div style="display: flex; justify-content: center; gap: 40px; margin-top: 15px; opacity: 0.6; flex-wrap: wrap;">
+                <span>🏢 Grande Empresa</span>
+                <span>📈 Startup Tech</span>
+                <span>💼 Consultoria</span>
+                <span>🛒 E-commerce</span>
+            </div>
+        </div>
+    </div>
+
+    <section class="section">
+        <div class="container grid-2">
+            <div>
+                <h2>Você ainda perde tempo construindo relatórios do zero?</h2>
+                <p>A maioria dos gestores gasta horas tentando consertar fórmulas quebradas ou formatando tabelas que ninguém entende.</p>
+                
+                <div class="problem-box">
+                    <strong>❌ O Jeito Antigo:</strong>
+                    <ul style="margin-top: 10px;">
+                        <li>• Erros manuais que custam dinheiro.</li>
+                        <li>• Visual feio e pouco profissional.</li>
+                        <li>• Horas perdidas no YouTube aprendendo fórmulas.</li>
+                    </ul>
+                </div>
+                
+                <p>Você não precisa ser um expert em Excel para ter um controle financeiro de nível mundial.</p>
+            </div>
+            <div>
+                <img src="https://via.placeholder.com/500x400/10B981/ffffff?text=GIF+Mostrando+Automacao" alt="Automação" style="border-radius: 12px; box-shadow: var(--shadow);">
+            </div>
+        </div>
+    </section>
+
+    <section class="section bg-gray">
+        <div class="container">
+            <h2>O que está incluso no pacote?</h2>
+            <div class="features-grid">
+                <div class="feature-card">
+                    <div class="icon">🚀</div>
+                    <h3>Dashboard Automático</h3>
+                    <p>Basta preencher os dados brutos e os gráficos se atualizam sozinhos em tempo real.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="icon">📱</div>
+                    <h3>100% Responsivo</h3>
+                    <p>Funciona perfeitamente no Excel Desktop, Google Sheets e visualização Mobile.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="icon">🎨</div>
+                    <h3>Design Executivo</h3>
+                    <p>Layouts prontos para apresentação. Impressione seu chefe ou clientes na hora.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="section" id="ofertas">
+        <div class="container">
+            <h2>Escolha o plano ideal para você</h2>
+            <p class="text-center" style="max-width: 600px; margin: 0 auto;">Invista uma vez, use para sempre. Sem mensalidades.</p>
+            
+            <div class="pricing-grid">
+                <div class="price-card">
+                    <h3>Starter</h3>
+                    <p style="font-size: 0.9rem; color: var(--text-light);">Apenas a planilha, sem extras.</p>
+                    <div class="old-price">R$ 97,00</div>
+                    <div class="price">R$ 47<span>/único</span></div>
+                    
+                    <ul class="benefits-list">
+                        <li><span class="check">✓</span> Planilha Dashboard 2.0</li>
+                        <li><span class="check">✓</span> Guia de Instalação PDF</li>
+                        <li><span class="cross">✕</span> Vídeo Aulas Explicativas</li>
+                        <li><span class="cross">✕</span> Pacote 50 Templates Extras</li>
+                    </ul>
+                    <a href="#" class="btn btn-secondary">Comprar Starter</a>
+                </div>
+
+                <div class="price-card popular">
+                    <div class="popular-badge">MAIS VENDIDO</div>
+                    <h3>Profissional</h3>
+                    <p style="font-size: 0.9rem; color: var(--text-light);">O pacote completo para gestão.</p>
+                    <div class="old-price">R$ 197,00</div>
+                    <div class="price">R$ 97<span>/único</span></div>
+                    
+                    <ul class="benefits-list">
+                        <li><span class="check">✓</span> <strong>Tudo do plano Starter</strong></li>
+                        <li><span class="check">✓</span> Curso Express de Excel (10 aulas)</li>
+                        <li><span class="check">✓</span> +50 Templates Editáveis</li>
+                        <li><span class="check">✓</span> Suporte Prioritário VIP</li>
+                    </ul>
+                    <a href="#" class="btn">Quero Este Pacote</a>
+                </div>
+
+                <div class="price-card">
+                    <h3>Business</h3>
+                    <p style="font-size: 0.9rem; color: var(--text-light);">Para consultores e empresas.</p>
+                    <div class="old-price">R$ 497,00</div>
+                    <div class="price">R$ 297<span>/único</span></div>
+                    
+                    <ul class="benefits-list">
+                        <li><span class="check">✓</span> <strong>Licença Comercial de Uso</strong></li>
+                        <li><span class="check">✓</span> 1 Hora de Consultoria Zoom</li>
+                        <li><span class="check">✓</span> Personalização da Marca</li>
+                        <li><span class="check">✓</span> Acesso Vitalício a Updates</li>
+                    </ul>
+                    <a href="#" class="btn btn-secondary">Contratar Business</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="section">
+        <div class="container">
+            <div class="guarantee">
+                <div style="font-size: 3rem; margin-bottom: 10px;">🛡️</div>
+                <h3>Garantia Incondicional de 7 Dias</h3>
+                <p>Se você baixar, usar e achar que não economizou seu tempo, nós devolvemos 100% do seu dinheiro. Sem perguntas.</p>
+            </div>
+        </div>
+    </section>
+
+    <section class="section bg-gray">
+        <div class="container" style="max-width: 800px;">
+            <h2>Perguntas Frequentes</h2>
+            
+            <div class="faq-item">
+                <div class="faq-question">Funciona no Google Sheets? <span>+</span></div>
+                <div class="faq-answer">Sim! A versão 2.0 foi otimizada tanto para Excel quanto para Google Sheets. Você recebe os dois arquivos.</div>
+            </div>
+            <div class="faq-item">
+                <div class="faq-question">Como recebo o acesso? <span>+</span></div>
+                <div class="faq-answer">Imediatamente após a confirmação do pagamento, você recebe um e-mail com o link de download e acesso à área de membros.</div>
+            </div>
+            <div class="faq-item">
+                <div class="faq-question">Preciso ter Excel avançado? <span>+</span></div>
+                <div class="faq-answer">Não. A planilha foi feita para ser "plug and play". Você só precisa preencher as células brancas, o resto é automático.</div>
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        <div class="container">
+            <p>Copyright © 2025 Sua Empresa. Todos os direitos reservados.</p>
+            <p style="margin-top: 10px; font-size: 0.8rem;">
+                <a href="#">Termos de Uso</a> | <a href="#">Política de Privacidade</a>
+            </p>
+        </div>
+    </footer>
+
+    <div class="sticky-cta">
+        <a href="#ofertas" class="btn" style="padding: 12px 20px; font-size: 1rem; width: 100%;">Comprar Agora - R$ 97</a>
+    </div>
+
+    <script>
+        // Lógica simples para o FAQ Accordion
+        const faqItems = document.querySelectorAll('.faq-item');
+        
+        faqItems.forEach(item => {
+            item.addEventListener('click', () => {
+                item.classList.toggle('active');
+                const span = item.querySelector('.faq-question span');
+                span.textContent = item.classList.contains('active') ? '-' : '+';
+            });
+        });
+
+        // Smooth Scroll para links internos
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                document.querySelector(this.getAttribute('href')).scrollIntoView({
+                    behavior: 'smooth'
+                });
+            });
+        });
+    </script>
+</body>
+</html>
