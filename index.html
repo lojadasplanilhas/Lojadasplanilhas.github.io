@@ -20,8 +20,9 @@
             --text-light: #6B7280;
             --bg-light: #F9FAFB;
             --white: #ffffff;
-            --accent: #F59E0B; /* Laranja para avisos/estrelas */
-            --radius: 12px;
+            --accent: #F59E0B;
+            --radius-card: 12px;
+            --radius-btn: 8px; /* Ajuste para botões retangulares arredondados */
             --shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
         }
 
@@ -42,12 +43,13 @@
         /* --- COMPONENTES --- */
         .container { max-width: 1100px; margin: 0 auto; padding: 0 20px; }
         
+        /* Botões Gerais */
         .btn {
             display: inline-block;
             background-color: var(--primary);
             color: var(--white);
             padding: 18px 36px;
-            border-radius: 50px;
+            border-radius: var(--radius-btn); /* Retangular arredondado */
             font-weight: 700;
             font-size: 1.2rem;
             text-transform: uppercase;
@@ -59,8 +61,17 @@
             text-align: center;
         }
         .btn:hover { background-color: var(--primary-dark); transform: translateY(-2px); }
+        
         .btn-secondary { background-color: transparent; border: 2px solid var(--primary); color: var(--primary); }
         .btn-secondary:hover { background-color: var(--primary); color: var(--white); }
+
+        /* Botão Pequeno (dentro da expansão) */
+        .btn-small {
+            padding: 12px 24px;
+            font-size: 1rem;
+            max-width: 100%;
+            box-shadow: none;
+        }
 
         .section { padding: 80px 0; }
         .bg-gray { background-color: var(--bg-light); }
@@ -80,12 +91,7 @@
         }
         .hero-sub { font-size: 1.25rem; color: var(--text-light); max-width: 700px; margin: 0 auto 40px; }
         
-        /* Mockup da Planilha (CSS Puro para placeholder) */
-        .mockup-container {
-            margin-top: 50px;
-            position: relative;
-            z-index: 10;
-        }
+        .mockup-container { margin-top: 50px; position: relative; z-index: 10; }
         .mockup {
             background: white; border-radius: 12px;
             box-shadow: 0 20px 40px -10px rgba(0,0,0,0.2);
@@ -99,32 +105,96 @@
         }
         .grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 60px; align-items: center; }
 
-        /* --- RECURSOS (ICONS) --- */
+        /* --- RECURSOS --- */
         .features-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 30px; margin-top: 50px; }
-        .feature-card { background: white; padding: 30px; border-radius: var(--radius); box-shadow: var(--shadow); transition: 0.3s; }
+        .feature-card { background: white; padding: 30px; border-radius: var(--radius-card); box-shadow: var(--shadow); transition: 0.3s; }
         .feature-card:hover { transform: translateY(-5px); }
         .icon { width: 50px; height: 50px; background: #ecfdf5; color: var(--primary); display: flex; align-items: center; justify-content: center; border-radius: 12px; font-size: 1.5rem; margin-bottom: 20px; }
 
-        /* --- PRICING (3 OFERTAS) --- */
+        /* --- PRICING --- */
         .pricing-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 20px; align-items: flex-start; margin-top: 60px; }
+        
         .price-card { 
             background: white; padding: 40px 30px; border-radius: 20px; 
             border: 1px solid #e5e7eb; text-align: center; position: relative;
+            transition: all 0.4s ease;
         }
+
         .price-card.popular { 
             border: 2px solid var(--primary); 
             box-shadow: 0 25px 50px -12px rgba(16, 185, 129, 0.25); 
-            transform: scale(1.05); z-index: 2; 
+            z-index: 2; 
         }
+        .price-card.popular:not(.expanded) { transform: scale(1.02); }
+
         .popular-badge {
             position: absolute; top: -15px; left: 50%; transform: translateX(-50%);
             background: var(--primary); color: white; padding: 5px 20px;
             border-radius: 20px; font-weight: 700; font-size: 0.9rem;
         }
+
+        /* --- EXPANSÃO E DETALHES --- */
+        .price-card.expanded {
+            border: 2px solid var(--primary);
+            box-shadow: 0 30px 60px -10px rgba(0, 0, 0, 0.25);
+            transform: scale(1.05);
+            z-index: 10;
+            background-color: #fff;
+        }
+
+        /* Botão "Ver mais detalhes" */
+        .btn-details-toggle {
+            background: none; border: none;
+            color: var(--text-light); text-decoration: underline;
+            cursor: pointer; font-size: 0.85rem; margin-top: 15px;
+            display: inline-block; transition: 0.2s;
+        }
+        .btn-details-toggle:hover { color: var(--primary); }
+
+        /* Conteúdo Oculto */
+        .details-content {
+            display: none;
+            margin-top: 20px;
+            padding-top: 20px;
+            border-top: 1px dashed #e5e7eb;
+            text-align: left;
+            animation: fadeIn 0.5s ease;
+        }
+        
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .details-img {
+            width: 100%; height: 150px; object-fit: cover;
+            border-radius: 8px; margin-bottom: 15px; background-color: #f3f4f6;
+        }
+        .details-text {
+            font-size: 0.95rem; color: var(--text-main);
+            margin-bottom: 20px; line-height: 1.5;
+        }
+
+        /* Botão Recolher (Novo Design) */
+        .btn-collapse {
+            display: block; width: 100%;
+            margin-top: 10px;
+            background: #F3F4F6; /* Fundo cinza suave */
+            color: var(--text-main);
+            border: 1px solid #E5E7EB;
+            padding: 10px;
+            border-radius: var(--radius-btn);
+            font-size: 0.85rem; font-weight: 600;
+            cursor: pointer; transition: 0.3s;
+        }
+        .btn-collapse:hover { background: #E5E7EB; }
+
+        /* ------------------------------------- */
+
         .price { font-size: 3rem; font-weight: 800; color: var(--secondary); margin: 20px 0 5px; }
         .price span { font-size: 1rem; color: var(--text-light); font-weight: 400; }
         .old-price { text-decoration: line-through; color: #9CA3AF; }
-        .benefits-list { text-align: left; margin: 30px 0; }
+        .benefits-list { text-align: left; margin: 30px 0 25px; }
         .benefits-list li { margin-bottom: 12px; display: flex; align-items: center; gap: 10px; font-size: 0.95rem; }
         .check { color: var(--primary); font-weight: bold; }
         .cross { color: #EF4444; }
@@ -136,7 +206,7 @@
         .faq-item.active .faq-answer { display: block; }
 
         /* --- GARANTIA --- */
-        .guarantee { background: #fff; border: 2px dashed var(--secondary); padding: 40px; border-radius: var(--radius); text-align: center; max-width: 800px; margin: 0 auto; }
+        .guarantee { background: #fff; border: 2px dashed var(--secondary); padding: 40px; border-radius: var(--radius-card); text-align: center; max-width: 800px; margin: 0 auto; }
 
         /* --- FOOTER & STICKY CTA --- */
         footer { background: var(--secondary); color: white; padding: 50px 0; text-align: center; font-size: 0.9rem; }
@@ -152,9 +222,10 @@
         @media (max-width: 768px) {
             h1 { font-size: 2rem; }
             .grid-2 { grid-template-columns: 1fr; gap: 30px; }
-            .price-card.popular { transform: scale(1); }
+            .price-card.popular:not(.expanded) { transform: scale(1); }
+            .price-card.expanded { transform: scale(1.02); } 
             .sticky-cta { display: block; }
-            body { padding-bottom: 80px; } /* Espaço para o sticky button */
+            body { padding-bottom: 80px; }
         }
     </style>
 </head>
@@ -244,7 +315,8 @@
             <h2>Escolha o pacote ideal para você</h2>
             <p class="text-center" style="max-width: 600px; margin: 0 auto;">Invista uma vez, use para sempre. Sem mensalidades.</p>
             
-            <div class="pricing-grid">
+            <div class="pricing-grid" id="ofertas">
+                
                 <div class="price-card">
                     <h3>Starter</h3>
                     <p style="font-size: 0.9rem; color: var(--text-light);">Apenas a planilha, sem extras.</p>
@@ -252,28 +324,72 @@
                     <div class="price">R$ 27<span>/único</span></div>
                     
                     <ul class="benefits-list">
-                        <li><span class="check">✓</span> Planilha Dashboard Plano de ação 3.0</li>
+                        <li><span class="check">✓</span> Planilha Dashboard Plano de ação</li>
                         <li><span class="check">✓</span>  Agenda Pessoal 3.0</li>
                         <li><span class="cross">✕</span> Planilhas para Gestão de Projetos</li>
                         <li><span class="cross">✕</span> Pacote de Dashboards</li>
                     </ul>
+
                     <a href="https://www.lojadasplanilhas.com.br/checkout/204333812:1" class="btn btn-secondary">Comprar Starter</a>
+
+                    <button class="btn-details-toggle">Ver mais detalhes</button>
+
+                    <div class="details-content">
+                        <img src="https://cdn.shopify.com/s/files/1/0674/1314/7788/files/Executor.png" alt="Detalhe Starter" class="details-img">
+                        <div class="details-text">
+                            <strong>O Essencial para começar.</strong><br>
+                            Com o pacote Starter, você recebe o arquivo principal do Dashboard Plano de ação 3.0 pronto para uso imediato além da planilha de agenda pessoal para agendar seus compromissos. Ideal para quem quer organização rápida sem templates adicionais.
+                        </div>
+                        <a href="https://www.lojadasplanilhas.com.br/checkout/204333812:1" class="btn btn-small">Garantir Agora</a>
+                        <button class="btn-collapse">Recolher Detalhes</button>
+                    </div>
                 </div>
 
-                <div class="price-card popular" id="ofertas">
+                <div class="price-card popular">
                     <div class="popular-badge">MAIS VENDIDO</div>
                     <h3>Profissional</h3>
-                    <p style="font-size: 0.9rem; color: var(--text-light);">O pacote completo para Gestão de Projetos.</p>
+                    <p style="font-size: 0.9rem; color: var(--text-light);">O pacote completo para Gestão.</p>
                     <div class="old-price">R$ 197,00</div>
                     <div class="price">R$ 67<span>/único</span></div>
                     
                     <ul class="benefits-list">
                         <li><span class="check">✓</span> <strong>Tudo do pacote Starter</strong></li>
                         <li><span class="check">✓</span> 7 planilhas para Gestão de Projetos</li>
-                        <li><span class="check">✓</span> 4 planilhas para desenvolvimento pessoal </li>
-                        <li><span class="check">✓</span> E-book 80 maneiras para economizar</li>
+                        <li><span class="check">✓</span> 4 planilhas desenvolvimento pessoal</li>
+                        <li><span class="check">✓</span> E-book 80 maneiras economizar</li>
                     </ul>
+
                     <a href="https://www.lojadasplanilhas.com.br/checkout/204334585:1" class="btn">Quero Este Pacote</a>
+
+                    <button class="btn-details-toggle">Ver mais detalhes</button>
+
+                    <div class="details-content">
+                        <img src="https://assets.mycartpanda.com/static/products_images/cd/7c/44/1765236865.jpg" alt="Detalhe Profissional" class="details-img">
+                        <div class="details-text">
+                            <strong>O melhor Custo x Benefício.</strong><br>
+                            Além do Dashboard principal e da agenda, você equipa seu arsenal com as seguintes planilhas:
+                            <ul >
+                                <p></p>
+                        <li><span class="check">✓</span> <strong>Tudo do pacote Starter</strong></li>
+                        <li><span class="check">✓</span> <strong>Planilha completa para Gestão de Projetos:</strong> com matriz RACI, Dashboard com diversos indicadores, controle de orçamento, cronograma, tudo integrado em uma planilha.</li>
+                         <li><span class="check">✓</span> Matriz de Habilidades</li>
+                          <li><span class="check">✓</span> Burndown Chart</li>
+                           <li><span class="check">✓</span> Viabilidade de Projetos</li>
+                            <li><span class="check">✓</span> Planilha de Plano de Ação</li>
+                            <li><span class="check">✓</span> Ata de Reunião</li>
+                            <li><span class="check">✓</span> Planilha Cronograma Gantt</li>
+                        <li><span class="check">✓</span> Roda da Vida</li>
+                        <li><span class="check">✓</span> Finanças pessoais</li>
+                        <li><span class="check">✓</span> Planilha cardápio semanal</li>
+                        <li><span class="check">✓</span> Planner semanal</li>
+                        <li><span class="check">✓</span> E-book 80 maneiras economizar</li>
+                        <li><span class="check">✓</span> E levando ainda hoje, receba a planilha <strong>Matriz de Eisenhower</strong></li>
+                    </ul>
+                            
+                        </div>
+                        <a href="https://www.lojadasplanilhas.com.br/checkout/204334585:1" class="btn btn-small">Quero o Profissional</a>
+                        <button class="btn-collapse">Recolher Detalhes</button>
+                    </div>
                 </div>
 
                 <div class="price-card">
@@ -284,11 +400,43 @@
                     
                     <ul class="benefits-list">
                         <li><span class="check">✓</span> <strong>Tudo do pacote Profissional</strong></li>
-                        <li><span class="check">✓</span> 10 Dashboards Editáveis</li>
+                        <li><span class="check">✓</span> 11 Dashboards Editáveis</li>
                         <li><span class="check">✓</span> +20 planilhas selecionadas</li>
                         <li><span class="check">✓</span> Acesso Vitalício a Updates</li>
                     </ul>
+
                     <a href="https://www.lojadasplanilhas.com.br/checkout/204359083:1" class="btn btn-secondary">Comprar Master</a>
+
+                    <button class="btn-details-toggle">Ver mais detalhes</button>
+
+                    <div class="details-content">
+                        <img src="https://assets.mycartpanda.com/static/products_images/2b/06/20/1765238672.jpg" alt="Detalhe Master" class="details-img">
+                        <div class="details-text">
+                            <strong>A biblioteca definitiva.</strong><br>
+                            Você nunca mais precisará criar uma planilha do zero. Tenha acesso a um acervo de modelos de planilhas e dashboard. Ideal para consultores, uso pessoal ou empresas que querem padronizar processos. A pacote possui:
+                            
+                            <ul >
+                                <p></p>
+                        <li><span class="check">✓</span> <strong>Tudo do pacote Profissional</strong></li>
+                        <li><span class="check">✓</span> Dashboard Auditoria de Processo</li>
+                         <li><span class="check">✓</span> Dashboard Planilha de estudos</li>
+                          <li><span class="check">✓</span> Dashboard controle de combustível</li>
+                           <li><span class="check">✓</span> Dashboard acidentes de trabalho</li>
+                            <li><span class="check">✓</span> Planilha de Plano de Ação backlog</li>
+                            <li><span class="check">✓</span> Dashboard Matriz Eisenhower</li>
+                            <li><span class="check">✓</span> Dashboard análise de problema de processo</li>
+                        <li><span class="check">✓</span> Contas a Pagar e a Receber</li>
+                        <li><span class="check">✓</span> Plano de ação quabro kanban</li>
+                        <li><span class="check">✓</span> Dashboard entrega de uniformes</li>
+                        <li><span class="check">✓</span> Dashboard reclamação e SAC</li>
+                        <li><span class="check">✓</span> <strong>Pacote consultoria com mais de 20 modelos de planilhas editáveis.</strong></li>
+                        
+                    </ul>
+                    
+                        </div>
+                        <a href="https://www.lojadasplanilhas.com.br/checkout/204359083:1" class="btn btn-small">Garantir Acesso Total</a>
+                        <button class="btn-collapse">Recolher Detalhes</button>
+                    </div>
                 </div>
             </div>
         </div>
@@ -337,9 +485,8 @@
     </div>
 
     <script>
-        // Lógica simples para o FAQ Accordion
+        // Lógica do FAQ
         const faqItems = document.querySelectorAll('.faq-item');
-        
         faqItems.forEach(item => {
             item.addEventListener('click', () => {
                 item.classList.toggle('active');
@@ -348,7 +495,7 @@
             });
         });
 
-        // Smooth Scroll para links internos
+        // Smooth Scroll
         document.querySelectorAll('a[href^="#"]').forEach(anchor => {
             anchor.addEventListener('click', function (e) {
                 e.preventDefault();
@@ -357,6 +504,46 @@
                 });
             });
         });
+
+        // LÓGICA DE EXPANSÃO DOS CARDS DE OFERTA
+        const toggleButtons = document.querySelectorAll('.btn-details-toggle');
+        const collapseButtons = document.querySelectorAll('.btn-collapse');
+
+        function closeAllCards() {
+            document.querySelectorAll('.price-card').forEach(card => {
+                card.classList.remove('expanded');
+                const content = card.querySelector('.details-content');
+                if(content) content.style.display = 'none';
+                
+                // Mostra o botão "Ver mais" de volta
+                const btnToggle = card.querySelector('.btn-details-toggle');
+                if(btnToggle) btnToggle.style.display = 'inline-block';
+            });
+        }
+
+        toggleButtons.forEach(btn => {
+            btn.addEventListener('click', (e) => {
+                const card = btn.closest('.price-card');
+                const content = card.querySelector('.details-content');
+                const isAlreadyOpen = card.classList.contains('expanded');
+                
+                closeAllCards();
+
+                if (!isAlreadyOpen) {
+                    card.classList.add('expanded');
+                    content.style.display = 'block';
+                    btn.style.display = 'none'; // Esconde o botão "Ver mais"
+                }
+            });
+        });
+
+        collapseButtons.forEach(btn => {
+            btn.addEventListener('click', (e) => {
+                closeAllCards();
+                e.stopPropagation();
+            });
+        });
+
     </script>
 </body>
 </html>
