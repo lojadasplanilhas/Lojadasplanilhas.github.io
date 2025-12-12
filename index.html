@@ -51,12 +51,13 @@
 
         /* --- NOTIFICAÇÕES DE VENDA --- */
         .sales-pop {
-            position: fixed; bottom: 30px; left: 30px;
+            position: fixed; bottom: 20px; left: 30px;
             background: white; padding: 16px; border-radius: 12px;
             box-shadow: 0 10px 25px rgba(0,0,0,0.1); border-left: 4px solid var(--primary);
-            display: flex; gap: 12px; align-items: center; z-index: 990;
+            display: flex; gap: 10px; align-items: center; z-index: 990;
             transform: translateX(-200%); transition: 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
             max-width: 320px;
+            max-height: 60px;
         }
         .sales-pop.active { transform: translateX(0); }
 
@@ -177,7 +178,7 @@
             .grid-2 { grid-template-columns: 1fr; gap: 30px; }
             .price-card.expanded { transform: scale(1.02); } 
             body { padding-bottom: 80px; }
-            .sales-pop { bottom: auto; top: 70px; left: 50%; transform: translateX(-50%) translateY(-200%); width: 90%; }
+            .sales-pop { bottom: auto; top: 55px; left: 50%; transform: translateX(-50%) translateY(-200%); width: 90%; }
             .sales-pop.active { transform: translateX(-50%) translateY(0); }
 	    .smart-sticky { display: flex; /* Mostra o botão apenas em telas menores que 768px */
 	    
