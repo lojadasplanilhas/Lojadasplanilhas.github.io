@@ -90,7 +90,10 @@
             max-width: 100%;
             box-shadow: none;
         }
-
+        .section { padding: 40px 0; }
+        .bg-gray { background-color: var(--bg-light); }
+        
+        
         /* --- HERO & PROVA SOCIAL --- */
         .hero { padding: 60px 0; text-align: center; background: radial-gradient(circle at center, #f0fdf4 0%, #ffffff 70%); }
         
@@ -177,6 +180,11 @@
             .sales-pop { bottom: auto; top: 70px; left: 50%; transform: translateX(-50%) translateY(-200%); width: 90%; }
             .sales-pop.active { transform: translateX(-50%) translateY(0); }
 	    .smart-sticky { display: flex; /* Mostra o botão apenas em telas menores que 768px */
+	    
+	 
+	    
+	       
+	    
     }
         }
     </style>
@@ -188,11 +196,11 @@
     </div>
 
     <div class="sales-pop" id="salesPop">
-        <img src="https://i.pravatar.cc/100?img=12" style="width:40px; height:40px; border-radius:50%;" id="popImg" alt="User">
+        <img src="https://cdn.pixabay.com/photo/2016/06/03/15/35/customer-service-1433640_1280.png" style="width:40px; height:40px; border-radius:50%;" id="popImg" alt="User">
         <div>
             <div style="font-weight:700; font-size:0.9rem;" id="popName">Fernanda M.</div>
-            <div style="font-size:0.8rem; color:var(--text-light);" id="popAction">Comprou o Plano PRO</div>
-            <div style="font-size:0.75rem; color:#94A3B8;">Há 2 minutos</div>
+            <div style="font-size:0.8rem; color:var(--text-light);" id="popAction">Comprou o Pacote PRO</div>
+            <div style="font-size:0.75rem; color:#94A3B8;" id="popMin">Há 30 minutos</div>
         </div>
     </div>
 
@@ -210,7 +218,7 @@
             </div>
 
             <div class="hero-badge">Novo Lançamento 2026</div>
-            <h1>A Planilha que <span class="highlight">Automatiza Suas Tarefas</span><br> e Economiza 20h/Semana</h1>
+            <h1>A Planilha que <span class="highlight">Automatiza Suas Tarefas</span><br> e Economiza 20h na Semana</h1>
             <p class="hero-sub">O Dashboard Pro 3.0 faz o trabalho duro por você. Transforme listas de tarefas em gráficos e indicadores visuais que mostram a saúde das suas tarefas. Simples, visual e não exige conhecimento avançado.</p>
             
             <a href="#ofertas" class="btn btn-pulse">Quero Meu Acesso Agora</a>
@@ -224,7 +232,7 @@
         </div>
     </section>
 
- <div class="section bg-gray" style="padding: 20px 0; text-align: center;">
+<div class="section bg-gray" style="padding: 20px 0; text-align: center;">
         <div class="container">
             <p style="font-size: 0.9rem; color: #9CA3AF; text-transform: uppercase; letter-spacing: 1px;">Ferramenta utilizada por profissionais de:</p>
             <div style="display: flex; justify-content: center; gap: 40px; margin-top: 15px; opacity: 0.6; flex-wrap: wrap;">
@@ -404,6 +412,156 @@
             </div>
         </div>
     </section>
+    
+    
+     <section class="premium-section-3">
+
+  <style>
+
+    @import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;900&display=swap');
+
+    /* O CSS continua o mesmo, pois as classes e estilos não mudaram */
+    .premium-section-3 {
+      font-family: 'Roboto', sans-serif;
+      padding: 40px 0;
+      background-color: #fff;
+      display: flex;
+      justify-content: center;
+    }
+
+    .p3-wrapper {
+      max-width: 1100px;
+      width: 95%;
+      display: grid;
+      grid-template-columns: 1.2fr 1.8fr;
+      gap: 30px;
+      background: #fff;
+      border-radius: 30px;
+    }
+
+    /* Coluna de Ação (Esquerda) */
+    .p3-action-col {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      padding: 30px 20px;
+    }
+
+    .p3-action-col h3 {
+      font-size: 2rem;
+      font-weight: 900;
+      color: #111;
+      margin: 0 0 15px 0;
+      letter-spacing: -1px;
+    }
+
+    .p3-highlight {
+      color: #21A366;
+    }
+
+    .p3-desc {
+      font-size: 1rem;
+      color: #555;
+      margin-bottom: 30px;
+      border-left: 4px solid #21A366;
+      padding-left: 15px;
+    }
+
+    /* Botão com Borda e Brilho */
+    .p3-btn {
+      text-align: center;
+      width: 100%;
+      padding: 20px;
+      background: #fff;
+      color: #21A366;
+      font-weight: 900;
+      text-transform: uppercase;
+      text-decoration: none;
+      border-radius: 12px;
+      position: relative;
+      overflow: hidden;
+      transition: all 0.3s;
+      animation: border-pulse 2s infinite;
+      border: 2px solid transparent;
+    }
+
+    .p3-btn:hover {
+      background: #21A366;
+      color: #fff;
+    }
+
+    @keyframes border-pulse {
+      0% { border-color: #21A366; transform: scale(0.98); }
+      50% { border-color: #88ffbd; transform: scale(1); box-shadow: 0 0 20px rgba(33, 163, 102, 0.4); }
+      100% { border-color: #21A366; transform: scale(0.98); }
+    }
+
+    /* Coluna Visual (Direita - Grid de Planilhas) */
+    .p3-visual-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      grid-template-rows: repeat(2, 120px);
+      gap: 15px;
+      padding: 30px 20px 30px 0;
+    }
+
+    .p3-item {
+      border-radius: 16px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 0.7rem;
+      color: #fff;
+      font-weight: bold;
+      position: relative;
+      background-size: cover;
+      background-position: center;
+      text-shadow: 1px 1px 3px rgba(0,0,0,0.8);
+    }
+    
+
+    
+    /* Layout Bento Grid - Itens com tamanhos variados */
+    .p3-item:nth-child(1) { grid-column: span 2; }
+    .p3-item:nth-child(2) { grid-row: span 2; }
+    
+    @media (max-width: 850px) {
+      .p3-wrapper { grid-template-columns: 1fr; }
+      .p3-visual-grid { 
+        grid-template-rows: repeat(2, 100px); 
+        padding: 0 30px 30px 30px;
+      }
+      .p3-action-col { padding: 30px; }
+    }
+  </style>
+
+  <div class="p3-wrapper">
+    <div class="p3-action-col">
+      <h3>Biblioteca <span class="p3-highlight">Premium</span></h3>
+       <p>
+         <strong>Precisa de outro modelo de planilha?</strong> 
+      </p>
+      
+      <p class="p3-desc">
+        Acesse o maior acervo do Brasil de planilhas. São mais de <strong>100 planilhas</strong> desenvolvidas por especialistas para automatizar o seu sucesso.
+      </p>
+      <a href="https://www.lojadasplanilhas.com.br" class="p3-btn">Acessar o Site</a>
+    </div>
+
+    <div class="p3-visual-grid">
+      
+      <div class="p3-item" style="background-image: url('https://cdn.pixabay.com/photo/2016/07/13/23/09/work-1515801_1280.jpg');"></a>Gestão de Projetos</div> 
+    
+      <div class="p3-item" style="background-image: url('https://cdn.pixabay.com/photo/2017/08/05/13/06/girl-2583442_1280.jpg');">Processos</div> 
+      <div class="p3-item" style="background-image: url('https://cdn.pixabay.com/photo/2017/07/31/11/44/laptop-2557571_1280.jpg');">Gestão</div>
+      <div class="p3-item" style="background-image: url('https://cdn.pixabay.com/photo/2022/11/03/15/24/coffee-7567749_1280.jpg');">Qualidade</div>
+    </div>
+  </div>
+
+</section>
+
+    
+    
 
      <section class="section bg-gray">
         <div class="container" style="max-width: 800px;">
@@ -434,6 +592,10 @@
             </div>
         </div>
     </section>
+
+
+
+
 
 
 
@@ -484,14 +646,21 @@
         });
 
         // --- 3. SALES NOTIFICATIONS ---
-        const names = ["Ricardo S.", "Ana Paula", "Marcos V.", "Júlia T.", "Fernando C.", "Patrícia L.", "Gustavo H."];
-        const actions = ["Acabou de adquirir o Plano MASTER 🚀", "Garantiu a oferta Profissional", "Baixou a Planilha Starter agora"];
+        const names = ["Ricardo S.", "Ana Paula", "Marcos V.", "Júlia T.", "Fernando C.", "Patrícia L.", "Gustavo H.", "Maria L.", "Rodrigo O.", "Camila P.", "Rafael D.", "Bianca M.", "André B.", "Sofia E.", "Pedro N.", "Larissa F.", "Guilherme J.", "Manuela Q.", "Alexandre K.", "Isabela R.", "Felipe A.", "Vitória Z.", "Daniel G.", "Helena W.", "Lucas X.", "Giovana Y.", "Eduardo I.", "Carolina U.", "Thiago S.", "Clara V."];
+        const actions = ["Adquiriu o Plano MASTER 🚀", "Garantiu a oferta Profissional 💼", "Baixou a Planilha Starter agora 👨‍🎓"];
+        
+        const min = ["Há 15 horas", "Há 5 minutos", "Há 24 horas", "Há 20 minutos", "Há 3 horas", "Há 45 minutos", "Há 12 horas", "Há 1 hora", "Há 20 horas", "Há 10 minutos", "Há 7 horas", "Há 1 hora e 30 minutos", "Há 16 horas", "Há 2 horas", "Há 4 horas", "Há 30 minutos", "Há 23 horas", "Há 1 minuto", "Há 13 horas", "Há 2 horas e 45 minutos", "Há 9 horas", "Agora", "Há 10 horas", "Há 6 horas", "Há 18 horas", "Há 14 horas", "Há 5 horas", "Há 22 horas", "Há 8 horas", "Há 11 horas", "Agora", "Agora", "Agora"];
+        
         const pop = document.getElementById('salesPop');
         
         function showPop() {
             document.getElementById('popName').innerText = names[Math.floor(Math.random() * names.length)];
             document.getElementById('popAction').innerText = actions[Math.floor(Math.random() * actions.length)];
-            document.getElementById('popImg').src = `https://i.pravatar.cc/100?img=${Math.floor(Math.random() * 50)}`;
+            document.getElementById('popImg').src = `https://cdn.pixabay.com/photo/2016/06/03/15/35/customer-service-1433640_1280.png`;
+            
+            document.getElementById('popMin').innerText = min[Math.floor(Math.random() * actions.length)];
+            
+            
             pop.classList.add('active');
             setTimeout(() => { pop.classList.remove('active'); }, 4000);
         }
