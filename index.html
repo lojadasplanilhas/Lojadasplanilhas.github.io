@@ -9,21 +9,23 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700;900&display=swap" rel="stylesheet">
+    <script src="https://unpkg.com/@phosphor-icons/web"></script>
 
     <style>
         /* --- RESET & VARIAVEIS GERAIS --- */
         :root {
-            --primary: #10B981; /* Verde "Sucesso/Excel" */
+            --primary: #10B981; 
             --primary-dark: #059669;
-            --secondary: #1F2937; /* Cinza Escuro Premium */
+            --secondary: #1F2937; 
             --text-main: #374151;
             --text-light: #6B7280;
             --bg-light: #F9FAFB;
             --white: #ffffff;
             --accent: #F59E0B;
             --radius-card: 12px;
-            --radius-btn: 8px; /* Ajuste para botões retangulares arredondados */
+            --radius-btn: 8px;
             --shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+            --blur: blur(12px);
         }
 
         * { margin: 0; padding: 0; box-sizing: border-box; }
@@ -31,6 +33,32 @@
         img { max-width: 100%; display: block; }
         a { text-decoration: none; transition: 0.3s; }
         ul { list-style: none; }
+
+        /* --- ANIMAÇÃO PULSAR (SOLICITADO) --- */
+        .btn-pulse { animation: pulse-green 2s infinite; }
+        @keyframes pulse-green {
+            0% { box-shadow: 0 0 0 0 rgba(16, 185, 129, 0.7); }
+            70% { box-shadow: 0 0 0 15px rgba(16, 185, 129, 0); }
+            100% { box-shadow: 0 0 0 0 rgba(16, 185, 129, 0); }
+        }
+
+        /* --- TOP BAR & TIMER --- */
+        .top-bar {
+            background: var(--secondary); color: white;
+            padding: 12px; text-align: center; font-size: 0.9rem; font-weight: 600;
+            position: sticky; top: 0; z-index: 1000;
+        }
+
+        /* --- NOTIFICAÇÕES DE VENDA --- */
+        .sales-pop {
+            position: fixed; bottom: 30px; left: 30px;
+            background: white; padding: 16px; border-radius: 12px;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.1); border-left: 4px solid var(--primary);
+            display: flex; gap: 12px; align-items: center; z-index: 990;
+            transform: translateX(-200%); transition: 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            max-width: 320px;
+        }
+        .sales-pop.active { transform: translateX(0); }
 
         /* --- TIPOGRAFIA --- */
         h1, h2, h3 { color: var(--secondary); font-weight: 800; line-height: 1.2; }
@@ -43,47 +71,32 @@
         /* --- COMPONENTES --- */
         .container { max-width: 1100px; margin: 0 auto; padding: 0 20px; }
         
-        /* Botões Gerais */
         .btn {
-            display: inline-block;
-            background-color: var(--primary);
-            color: var(--white);
-            padding: 18px 36px;
-            border-radius: var(--radius-btn); /* Retangular arredondado */
-            font-weight: 700;
-            font-size: 1.2rem;
-            text-transform: uppercase;
+            display: inline-block; background-color: var(--primary); color: var(--white);
+            padding: 18px 36px; border-radius: var(--radius-btn);
+            font-weight: 700; font-size: 1.2rem; text-transform: uppercase;
             box-shadow: 0 4px 14px rgba(16, 185, 129, 0.4);
-            cursor: pointer;
-            border: none;
-            width: 100%;
-            max-width: 350px;
-            text-align: center;
+            cursor: pointer; border: none; width: 100%; max-width: 350px; text-align: center;
         }
         .btn:hover { background-color: var(--primary-dark); transform: translateY(-2px); }
-        
-        .btn-secondary { background-color: transparent; border: 2px solid var(--primary); color: var(--primary); }
+       .btn-secondary { background-color: transparent; border: 2px solid var(--primary); color: var(--primary); }
         .btn-secondary:hover { background-color: var(--primary); color: var(--white); }
-
-        /* Botão Pequeno (dentro da expansão) */
-        .btn-small {
-            padding: 12px 24px;
-            font-size: 1rem;
-            max-width: 100%;
-            box-shadow: none;
-        }
 
         .section { padding: 80px 0; }
         .bg-gray { background-color: var(--bg-light); }
 
-        /* --- HEADER & HERO --- */
-        header { background: var(--secondary); color: white; padding: 15px 0; font-size: 0.9rem; text-align: center; }
+        /* --- HERO & PROVA SOCIAL --- */
+        .hero { padding: 60px 0; text-align: center; background: radial-gradient(circle at center, #f0fdf4 0%, #ffffff 70%); }
         
-        .hero { 
-            padding: 80px 0 60px; 
-            text-align: center; 
-            background: radial-gradient(circle at center, #f0fdf4 0%, #ffffff 70%);
+        /* Avatares e Estrelas (Código 2) */
+        .social-proof-hero {
+            display: flex; justify-content: center; align-items: center; gap: 12px; margin-bottom: 20px;
+            font-size: 0.9rem; font-weight: 600; color: var(--secondary);
         }
+        .avatar-stack { display: flex; margin-right: 5px; }
+        .avatar-stack img { width: 35px; height: 35px; border-radius: 50%; border: 2px solid white; margin-left: -12px; }
+        .avatar-stack img:first-child { margin-left: 0; }
+        
         .hero-badge {
             background: #d1fae5; color: #065f46; padding: 5px 15px; 
             border-radius: 20px; font-size: 0.85rem; font-weight: 700; 
@@ -98,98 +111,40 @@
             border: 1px solid #e5e7eb; overflow: hidden;
         }
 
-        /* --- PROBLEMA & SOLUÇÃO --- */
-        .problem-box {
-            background: #FEF2F2; border-left: 5px solid #EF4444; padding: 30px; 
-            margin: 20px 0; border-radius: 0 12px 12px 0;
+        /* --- SMART STICKY CTA (Código 2) --- */
+        .smart-sticky {
+            position: fixed; bottom: 20px; left: 50%; transform: translateX(-50%) translateY(150%);
+            width: 90%; max-width: 450px;
+            background: rgba(255, 255, 255, 0.9); backdrop-filter: var(--blur);
+            padding: 12px; border-radius: 16px;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.15); border: 1px solid rgba(0,0,0,0.05);
+            z-index: 999; display: flex; align-items: center; justify-content: space-between; gap: 15px;
+            transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1);
         }
-        .grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 60px; align-items: center; }
+        .smart-sticky.visible { transform: translateX(-50%) translateY(0); }
+        .sticky-info div:first-child { font-weight: 700; font-size: 0.9rem; color: var(--secondary); }
+        .sticky-info div:last-child { font-size: 0.8rem; color: var(--primary); font-weight: 600; }
+        .smart-sticky .btn { padding: 10px 20px; font-size: 0.9rem; width: auto; max-width: 180px; box-shadow: none; }
 
-        /* --- RECURSOS --- */
+        /* --- RESTO DOS ESTILOS (Cards, FAQ, etc) --- */
+        .problem-box { background: #FEF2F2; border-left: 5px solid #EF4444; padding: 30px; margin: 20px 0; border-radius: 0 12px 12px 0; }
+        .grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 60px; align-items: center; }
         .features-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 30px; margin-top: 50px; }
         .feature-card { background: white; padding: 30px; border-radius: var(--radius-card); box-shadow: var(--shadow); transition: 0.3s; }
         .feature-card:hover { transform: translateY(-5px); }
         .icon { width: 50px; height: 50px; background: #ecfdf5; color: var(--primary); display: flex; align-items: center; justify-content: center; border-radius: 12px; font-size: 1.5rem; margin-bottom: 20px; }
 
-        /* --- PRICING --- */
         .pricing-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 20px; align-items: flex-start; margin-top: 60px; }
+        .price-card { background: white; padding: 40px 30px; border-radius: 20px; border: 1px solid #e5e7eb; text-align: center; position: relative; transition: all 0.4s ease; }
+        .price-card.popular { border: 2px solid var(--primary); box-shadow: 0 25px 50px -12px rgba(16, 185, 129, 0.25); z-index: 2; }
+        .price-card.expanded { border: 2px solid var(--primary); box-shadow: 0 30px 60px -10px rgba(0, 0, 0, 0.25); transform: scale(1.05); z-index: 10; background-color: #fff; }
+        .popular-badge { position: absolute; top: -15px; left: 50%; transform: translateX(-50%); background: var(--primary); color: white; padding: 5px 20px; border-radius: 20px; font-weight: 700; font-size: 0.9rem; }
         
-        .price-card { 
-            background: white; padding: 40px 30px; border-radius: 20px; 
-            border: 1px solid #e5e7eb; text-align: center; position: relative;
-            transition: all 0.4s ease;
-        }
-
-        .price-card.popular { 
-            border: 2px solid var(--primary); 
-            box-shadow: 0 25px 50px -12px rgba(16, 185, 129, 0.25); 
-            z-index: 2; 
-        }
-        .price-card.popular:not(.expanded) { transform: scale(1.02); }
-
-        .popular-badge {
-            position: absolute; top: -15px; left: 50%; transform: translateX(-50%);
-            background: var(--primary); color: white; padding: 5px 20px;
-            border-radius: 20px; font-weight: 700; font-size: 0.9rem;
-        }
-
-        /* --- EXPANSÃO E DETALHES --- */
-        .price-card.expanded {
-            border: 2px solid var(--primary);
-            box-shadow: 0 30px 60px -10px rgba(0, 0, 0, 0.25);
-            transform: scale(1.05);
-            z-index: 10;
-            background-color: #fff;
-        }
-
-        /* Botão "Ver mais detalhes" */
-        .btn-details-toggle {
-            background: none; border: none;
-            color: var(--text-light); text-decoration: underline;
-            cursor: pointer; font-size: 0.85rem; margin-top: 15px;
-            display: inline-block; transition: 0.2s;
-        }
-        .btn-details-toggle:hover { color: var(--primary); }
-
-        /* Conteúdo Oculto */
-        .details-content {
-            display: none;
-            margin-top: 20px;
-            padding-top: 20px;
-            border-top: 1px dashed #e5e7eb;
-            text-align: left;
-            animation: fadeIn 0.5s ease;
-        }
-        
-        @keyframes fadeIn {
-            from { opacity: 0; transform: translateY(10px); }
-            to { opacity: 1; transform: translateY(0); }
-        }
-
-        .details-img {
-            width: 100%; height: 150px; object-fit: cover;
-            border-radius: 8px; margin-bottom: 15px; background-color: #f3f4f6;
-        }
-        .details-text {
-            font-size: 0.95rem; color: var(--text-main);
-            margin-bottom: 20px; line-height: 1.5;
-        }
-
-        /* Botão Recolher (Novo Design) */
-        .btn-collapse {
-            display: block; width: 100%;
-            margin-top: 10px;
-            background: #F3F4F6; /* Fundo cinza suave */
-            color: var(--text-main);
-            border: 1px solid #E5E7EB;
-            padding: 10px;
-            border-radius: var(--radius-btn);
-            font-size: 0.85rem; font-weight: 600;
-            cursor: pointer; transition: 0.3s;
-        }
-        .btn-collapse:hover { background: #E5E7EB; }
-
-        /* ------------------------------------- */
+        .btn-details-toggle { background: none; border: none; color: var(--text-light); text-decoration: underline; cursor: pointer; font-size: 0.85rem; margin-top: 15px; display: inline-block; }
+        .details-content { display: none; margin-top: 20px; padding-top: 20px; border-top: 1px dashed #e5e7eb; text-align: left; animation: fadeIn 0.5s ease; }
+        @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
+        .details-img { width: 100%; height: 150px; object-fit: cover; border-radius: 8px; margin-bottom: 15px; background-color: #f3f4f6; }
+        .btn-collapse { display: block; width: 100%; margin-top: 10px; background: #F3F4F6; color: var(--text-main); border: 1px solid #E5E7EB; padding: 10px; border-radius: var(--radius-btn); font-size: 0.85rem; font-weight: 600; cursor: pointer; }
 
         .price { font-size: 3rem; font-weight: 800; color: var(--secondary); margin: 20px 0 5px; }
         .price span { font-size: 1rem; color: var(--text-light); font-weight: 400; }
@@ -199,49 +154,57 @@
         .check { color: var(--primary); font-weight: bold; }
         .cross { color: #EF4444; }
 
-        /* --- FAQ --- */
         .faq-item { border-bottom: 1px solid #e5e7eb; padding: 20px 0; }
         .faq-question { font-weight: 700; cursor: pointer; display: flex; justify-content: space-between; align-items: center; }
         .faq-answer { display: none; margin-top: 15px; color: var(--text-light); }
         .faq-item.active .faq-answer { display: block; }
-
-        /* --- GARANTIA --- */
         .guarantee { background: #fff; border: 2px dashed var(--secondary); padding: 40px; border-radius: var(--radius-card); text-align: center; max-width: 800px; margin: 0 auto; }
-
-        /* --- FOOTER & STICKY CTA --- */
         footer { background: var(--secondary); color: white; padding: 50px 0; text-align: center; font-size: 0.9rem; }
         footer a { color: #9CA3AF; }
-        
-        .sticky-cta {
-            display: none; position: fixed; bottom: 0; left: 0; width: 100%;
-            background: white; padding: 15px; box-shadow: 0 -5px 15px rgba(0,0,0,0.1);
-            z-index: 100; text-align: center; border-top: 1px solid #eee;
-        }
 
-        /* --- RESPONSIVIDADE --- */
         @media (max-width: 768px) {
             h1 { font-size: 2rem; }
             .grid-2 { grid-template-columns: 1fr; gap: 30px; }
-            .price-card.popular:not(.expanded) { transform: scale(1); }
             .price-card.expanded { transform: scale(1.02); } 
-            .sticky-cta { display: block; }
             body { padding-bottom: 80px; }
+            .sales-pop { bottom: auto; top: 70px; left: 50%; transform: translateX(-50%) translateY(-200%); width: 90%; }
+            .sales-pop.active { transform: translateX(-50%) translateY(0); }
         }
     </style>
 </head>
 <body>
 
-    <header>
-        🔥 Oferta Limitada: Economize 60% apenas hoje até as 23:59!
-    </header>
+    <div class="top-bar">
+        ⏳ Oferta de Lançamento 2026: O desconto expira em <span style="color:#FCA5A5; font-family:monospace" id="timer">04:00:00</span>
+    </div>
+
+    <div class="sales-pop" id="salesPop">
+        <img src="https://i.pravatar.cc/100?img=12" style="width:40px; height:40px; border-radius:50%;" id="popImg" alt="User">
+        <div>
+            <div style="font-weight:700; font-size:0.9rem;" id="popName">Fernanda M.</div>
+            <div style="font-size:0.8rem; color:var(--text-light);" id="popAction">Comprou o Plano PRO</div>
+            <div style="font-size:0.75rem; color:#94A3B8;">Há 2 minutos</div>
+        </div>
+    </div>
 
     <section class="hero">
         <div class="container">
+            <div class="social-proof-hero">
+                <div class="avatar-stack">
+                    <img src="https://i.pravatar.cc/100?img=1" alt="User">
+                    <img src="https://i.pravatar.cc/100?img=5" alt="User">
+                    <img src="https://i.pravatar.cc/100?img=9" alt="User">
+                    <img src="https://i.pravatar.cc/100?img=15" alt="User">
+                </div>
+                <span>+1.200 downloads</span>
+                <span style="color:var(--accent)">★★★★★</span>
+            </div>
+
             <div class="hero-badge">Novo Lançamento 2026</div>
             <h1>A Planilha que <span class="highlight">Automatiza Suas Tarefas</span><br> e Economiza 20h/Semana</h1>
             <p class="hero-sub">O Dashboard Pro 3.0 faz o trabalho duro por você. Transforme listas de tarefas em gráficos e indicadores visuais que mostram a saúde das suas tarefas. Simples, visual e não exige conhecimento avançado.</p>
             
-            <a href="#ofertas" class="btn">Quero Meu Acesso Agora</a>
+            <a href="#ofertas" class="btn btn-pulse">Quero Meu Acesso Agora</a>
             <p style="font-size: 0.85rem; color: #6B7280; margin-top: 10px;">🔒 Pagamento Único • Acesso Vitalício</p>
 
             <div class="mockup-container">
@@ -252,7 +215,7 @@
         </div>
     </section>
 
-    <div class="section bg-gray" style="padding: 20px 0; text-align: center;">
+ <div class="section bg-gray" style="padding: 20px 0; text-align: center;">
         <div class="container">
             <p style="font-size: 0.9rem; color: #9CA3AF; text-transform: uppercase; letter-spacing: 1px;">Ferramenta utilizada por profissionais de:</p>
             <div style="display: flex; justify-content: center; gap: 40px; margin-top: 15px; opacity: 0.6; flex-wrap: wrap;">
@@ -264,7 +227,7 @@
         </div>
     </div>
 
-    <section class="section">
+   <section class="section">
         <div class="container grid-2">
             <div>
                 <h2>Você ainda perde tempo construindo relatórios do zero?</h2>
@@ -287,7 +250,7 @@
         </div>
     </section>
 
-    <section class="section bg-gray">
+  <section class="section bg-gray">
         <div class="container">
             <h2>O que está incluso no pacote?</h2>
             <div class="features-grid">
@@ -310,6 +273,11 @@
         </div>
     </section>
 
+
+
+
+
+
     <section class="section" id="oferta">
         <div class="container">
             <h2>Escolha o pacote ideal para você</h2>
@@ -329,17 +297,11 @@
                         <li><span class="cross">✕</span> Planilhas para Gestão de Projetos</li>
                         <li><span class="cross">✕</span> Pacote de Dashboards</li>
                     </ul>
-
                     <a href="https://www.lojadasplanilhas.com.br/checkout/204333812:1" class="btn btn-secondary">Comprar Starter</a>
-
                     <button class="btn-details-toggle">Ver mais detalhes</button>
-
                     <div class="details-content">
                         <img src="https://cdn.shopify.com/s/files/1/0674/1314/7788/files/planilha.jpg" alt="Detalhe Starter" class="details-img">
-                        <div class="details-text">
-                            <strong>O Essencial para começar.</strong><br>
-                            Com o pacote Starter, você recebe o arquivo principal do Dashboard Plano de ação 3.0 pronto para uso imediato além da planilha de agenda pessoal para agendar seus compromissos. Ideal para quem quer organização rápida sem templates adicionais.
-                        </div>
+                        <div class="details-text"><strong>O Essencial para começar.</strong><br>Com o pacote Starter, você recebe o arquivo principal do Dashboard Plano de ação 3.0 pronto para uso imediato além da planilha de agenda pessoal para agendar seus compromissos. Ideal para quem quer organização rápida sem templates adicionais.<p></p></div>
                         <a href="https://www.lojadasplanilhas.com.br/checkout/204333812:1" class="btn btn-small">Comprar Agora</a>
                         <button class="btn-collapse">Recolher Detalhes</button>
                     </div>
@@ -359,15 +321,12 @@
                         <li><span class="check">✓</span> E-book 80 maneiras economizar</li>
                     </ul>
 
-                    <a href="https://www.lojadasplanilhas.com.br/checkout/204334585:1" class="btn">Comprar Agora</a>
+                    <a href="https://www.lojadasplanilhas.com.br/checkout/204334585:1" class="btn btn-pulse">Comprar Agora</a>
 
                     <button class="btn-details-toggle">Ver mais detalhes</button>
-
                     <div class="details-content">
                         <img src="https://assets.mycartpanda.com/static/products_images/cd/7c/44/1765236865.jpg" alt="Detalhe Profissional" class="details-img">
-                        <div class="details-text">
-                            <strong>O melhor Custo x Benefício.</strong><br>
-                            Além do Dashboard principal e da agenda, você equipa seu arsenal com as seguintes planilhas:
+                        <div class="details-text"><strong>O melhor Custo x Benefício.</strong><br>Além do Dashboard principal e da agenda, você equipa seu arsenal com as seguintes planilhas:
                             <ul >
                                 <p></p>
                         <li><span class="check">✓</span> <strong>Tudo do pacote Starter</strong></li>
@@ -385,8 +344,8 @@
                         <li><span class="check">✓</span> E-book 80 maneiras economizar</li>
                         <li><span class="check">✓</span> E levando ainda hoje, receba a planilha <strong>Matriz de Eisenhower</strong></li>
                     </ul>
-                            
-                        </div>
+                    <p></p>
+                    </div>
                         <a href="https://www.lojadasplanilhas.com.br/checkout/204334585:1" class="btn btn-small">Comprar Agora</a>
                         <button class="btn-collapse">Recolher Detalhes</button>
                     </div>
@@ -404,16 +363,11 @@
                         <li><span class="check">✓</span> +20 planilhas selecionadas</li>
                         <li><span class="check">✓</span> Acesso Vitalício a Updates</li>
                     </ul>
-
                     <a href="https://www.lojadasplanilhas.com.br/checkout/204359083:1" class="btn btn-secondary">Comprar Master</a>
-
                     <button class="btn-details-toggle">Ver mais detalhes</button>
-
                     <div class="details-content">
                         <img src="https://assets.mycartpanda.com/static/products_images/2b/06/20/1765238672.jpg" alt="Detalhe Master" class="details-img">
-                        <div class="details-text">
-                            <strong>A biblioteca definitiva.</strong><br>
-                            Você nunca mais precisará criar uma planilha do zero. Tenha acesso a um acervo de modelos de planilhas e dashboard. Ideal para consultores, uso pessoal ou empresas que querem padronizar processos. A pacote possui:
+                        <div class="details-text"><strong>A biblioteca definitiva.</strong><br>Você nunca mais precisará criar uma planilha do zero. Tenha acesso a um acervo de modelos de planilhas e dashboard. Ideal para consultores, uso pessoal ou empresas que querem padronizar processos. A pacote possui:
                             
                             <ul >
                                 <p></p>
@@ -432,8 +386,8 @@
                         <li><span class="check">✓</span> <strong>Pacote consultoria com mais de 20 modelos de planilhas editáveis.</strong></li>
                         
                     </ul>
-                    
-                        </div>
+                    <p></p>
+                    </div>
                         <a href="https://www.lojadasplanilhas.com.br/checkout/204359083:1" class="btn btn-small">Comprar Agora</a>
                         <button class="btn-collapse">Recolher Detalhes</button>
                     </div>
@@ -442,9 +396,7 @@
         </div>
     </section>
 
-
-
-    <section class="section bg-gray">
+     <section class="section bg-gray">
         <div class="container" style="max-width: 800px;">
             <h2>Perguntas Frequentes</h2>
             
@@ -463,6 +415,7 @@
         </div>
     </section>
 
+
     <section class="section">
         <div class="container">
             <div class="guarantee">
@@ -474,6 +427,7 @@
     </section>
 
 
+
     <footer>
         <div class="container">
             <p>Copyright © 2026 Loja das Planilhas. Todos os direitos reservados.</p>
@@ -483,14 +437,59 @@
         </div>
     </footer>
 
-    <div class="sticky-cta">
-        <a href="#ofertas" class="btn" style="padding: 12px 20px; font-size: 1rem; width: 100%;">Ver Ofertas</a>
+    <div class="smart-sticky" id="stickyCta">
+        <div class="sticky-info">
+            <div>Executor Pro 3.0</div>
+            <div>⚡ Oferta de Lançamento</div>
+        </div>
+        <a href="#ofertas" class="btn">Comprar Agora</a>
     </div>
 
     <script>
-        // Lógica do FAQ
-        const faqItems = document.querySelectorAll('.faq-item');
-        faqItems.forEach(item => {
+        // --- 1. COUNTDOWN TIMER (4 HORAS) ---
+        function startTimer(duration, display) {
+            let timer = duration, hours, minutes, seconds;
+            setInterval(function () {
+                hours = parseInt(timer / 3600, 10);
+                minutes = parseInt((timer % 3600) / 60, 10);
+                seconds = parseInt(timer % 60, 10);
+                hours = hours < 10 ? "0" + hours : hours;
+                minutes = minutes < 10 ? "0" + minutes : minutes;
+                seconds = seconds < 10 ? "0" + seconds : seconds;
+                display.textContent = hours + ":" + minutes + ":" + seconds;
+                if (--timer < 0) timer = duration;
+            }, 1000);
+        }
+        window.onload = function () {
+            startTimer(4 * 60 * 60, document.querySelector('#timer'));
+        };
+
+        // --- 2. SMART STICKY CTA (SCROLL) ---
+        const stickyCta = document.getElementById('stickyCta');
+        window.addEventListener('scroll', () => {
+            if (window.scrollY > 500) {
+                stickyCta.classList.add('visible');
+            } else {
+                stickyCta.classList.remove('visible');
+            }
+        });
+
+        // --- 3. SALES NOTIFICATIONS ---
+        const names = ["Ricardo S.", "Ana Paula", "Marcos V.", "Júlia T.", "Fernando C.", "Patrícia L.", "Gustavo H."];
+        const actions = ["Acabou de adquirir o Plano MASTER 🚀", "Garantiu a oferta Profissional", "Baixou a Planilha Starter agora"];
+        const pop = document.getElementById('salesPop');
+        
+        function showPop() {
+            document.getElementById('popName').innerText = names[Math.floor(Math.random() * names.length)];
+            document.getElementById('popAction').innerText = actions[Math.floor(Math.random() * actions.length)];
+            document.getElementById('popImg').src = `https://i.pravatar.cc/100?img=${Math.floor(Math.random() * 50)}`;
+            pop.classList.add('active');
+            setTimeout(() => { pop.classList.remove('active'); }, 4000);
+        }
+        setTimeout(() => { showPop(); setInterval(showPop, 18000); }, 5000);
+
+        // --- 4. LÓGICA DO FAQ ---
+        document.querySelectorAll('.faq-item').forEach(item => {
             item.addEventListener('click', () => {
                 item.classList.toggle('active');
                 const span = item.querySelector('.faq-question span');
@@ -498,17 +497,7 @@
             });
         });
 
-        // Smooth Scroll
-        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-            anchor.addEventListener('click', function (e) {
-                e.preventDefault();
-                document.querySelector(this.getAttribute('href')).scrollIntoView({
-                    behavior: 'smooth'
-                });
-            });
-        });
-
-        // LÓGICA DE EXPANSÃO DOS CARDS DE OFERTA
+        // --- 5. LÓGICA DE EXPANSÃO DOS CARDS ---
         const toggleButtons = document.querySelectorAll('.btn-details-toggle');
         const collapseButtons = document.querySelectorAll('.btn-collapse');
 
@@ -517,25 +506,21 @@
                 card.classList.remove('expanded');
                 const content = card.querySelector('.details-content');
                 if(content) content.style.display = 'none';
-                
-                // Mostra o botão "Ver mais" de volta
                 const btnToggle = card.querySelector('.btn-details-toggle');
                 if(btnToggle) btnToggle.style.display = 'inline-block';
             });
         }
 
         toggleButtons.forEach(btn => {
-            btn.addEventListener('click', (e) => {
+            btn.addEventListener('click', () => {
                 const card = btn.closest('.price-card');
                 const content = card.querySelector('.details-content');
                 const isAlreadyOpen = card.classList.contains('expanded');
-                
                 closeAllCards();
-
                 if (!isAlreadyOpen) {
                     card.classList.add('expanded');
                     content.style.display = 'block';
-                    btn.style.display = 'none'; // Esconde o botão "Ver mais"
+                    btn.style.display = 'none';
                 }
             });
         });
@@ -547,6 +532,13 @@
             });
         });
 
+        // Smooth Scroll
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                document.querySelector(this.getAttribute('href')).scrollIntoView({ behavior: 'smooth' });
+            });
+        });
     </script>
 </body>
 </html>
