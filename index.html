@@ -82,8 +82,14 @@
        .btn-secondary { background-color: transparent; border: 2px solid var(--primary); color: var(--primary); }
         .btn-secondary:hover { background-color: var(--primary); color: var(--white); }
 
-        .section { padding: 80px 0; }
-        .bg-gray { background-color: var(--bg-light); }
+      
+        /* Botão Pequeno (dentro da expansão) */
+        .btn-small {
+            padding: 12px 24px;
+            font-size: 1rem;
+            max-width: 100%;
+            box-shadow: none;
+        }
 
         /* --- HERO & PROVA SOCIAL --- */
         .hero { padding: 60px 0; text-align: center; background: radial-gradient(circle at center, #f0fdf4 0%, #ffffff 70%); }
@@ -113,13 +119,13 @@
 
         /* --- SMART STICKY CTA (Código 2) --- */
         .smart-sticky {
-	    display: none;
+	    
             position: fixed; bottom: 20px; left: 50%; transform: translateX(-50%) translateY(150%);
             width: 90%; max-width: 450px;
             background: rgba(255, 255, 255, 0.9); backdrop-filter: var(--blur);
             padding: 12px; border-radius: 16px;
             box-shadow: 0 10px 40px rgba(0,0,0,0.15); border: 1px solid rgba(0,0,0,0.05);
-            z-index: 999; display: flex; align-items: center; justify-content: space-between; gap: 15px;
+            z-index: 999; display: none; align-items: center; justify-content: space-between; gap: 15px;
             transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1);
         }
         .smart-sticky.visible { transform: translateX(-50%) translateY(0); }
@@ -413,7 +419,7 @@
             </div>
             <div class="faq-item">
                 <div class="faq-question">Em caso de problemas ou dúvidas como proceder? <span>+</span></div>
-                <div class="faq-answer">Todas as planilhas do site são testadas de modo a garantir o funcionamento conforme anunciado. São de fácil preenchimento e entendimento e garantimos a correção contra eventuais erros de fórmulas. Qualquer alteração dos arquivos fica a cargo do comprador que pode ele mesmo fazer. A Loja das Planilhas não se responsabiliza por alterações estruturais nas planilhas bem como outras feitas pelo comprador após a entrega. Oferecemos suporte a dúvidas básicas ou incompatibilidades  <strong></b><a href="https://api.whatsapp.com/send?phone=5516991724025">clicando aqui.</a></strong></div>
+                <div class="faq-answer">Todas as planilhas do site são testadas de modo a garantir o funcionamento conforme anunciado. São de fácil preenchimento e entendimento e garantimos a correção contra eventuais erros de fórmulas. Qualquer alteração dos arquivos fica a cargo do comprador que pode ele mesmo fazer. A Loja das Planilhas não se responsabiliza por alterações estruturais nas planilhas bem como outras feitas pelo comprador após a entrega. Oferecemos suporte a dúvidas básicas ou incompatibilidades  <strong><a href="https://api.whatsapp.com/send?phone=5516991724025">clicando aqui.</a></strong></div>
             </div>
         </div>
     </section>
