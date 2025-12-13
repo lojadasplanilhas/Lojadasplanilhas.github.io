@@ -43,6 +43,90 @@
             70% { box-shadow: 0 0 0 15px rgba(16, 185, 129, 0); }
             100% { box-shadow: 0 0 0 0 rgba(16, 185, 129, 0); }
         }
+        
+        
+        /* Variáveis baseadas no seu projeto */
+        :root {
+            --primary-dark: #064E3B; /* Verde Escuro para destaque */
+            --gray-bg: #F8FAFC; /* Fundo cinza claro */
+        }
+        
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+        
+       
+
+        /* --- ESTILO DA BARRA DE CONFIANÇA --- */
+        .trust-section {
+            background-color: var(--gray-bg); 
+            padding: 10px 10px;
+            width: 100%;
+            border-top: 1px solid #e2e8f0;
+            border-bottom: 1px solid #e2e8f0;
+        }
+
+        .trust-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: grid;
+            /* Desktop: 4 colunas */
+            grid-template-columns: repeat(4, 1fr); 
+            gap: 20px;
+            align-items: center;
+        }
+
+        .trust-item {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            padding: 10px 0;
+            transition: transform 0.2s ease;
+            text-decoration: none;
+        }
+
+        .trust-item:hover {
+            transform: translateY(-2px);
+        }
+
+        .trust-icon {
+            font-size: 32px; 
+            color: #0e7490; 
+            flex-shrink: 0; 
+        }
+
+        .trust-text {
+            font-size: 0.95rem;
+            color: #0e7490; 
+            line-height: 1.4;
+            font-weight: 500;
+        }
+        
+        /* Destaque para o WhatsApp */
+        .whatsapp-item .trust-icon, .whatsapp-item .trust-text {
+            color: var(--primary-dark); 
+            font-weight: 600;
+        }
+
+
+        /* --- RESPONSIVIDADE (Ajuste Solicitado: 2x2 no Mobile) --- */
+
+        /* Tablets (Abaixo de 900px) */
+        @media (max-width: 900px) {
+            .trust-container {
+                grid-template-columns: 1fr 1fr; /* 2 por linha em tablets */
+            }
+        }
+
+        /* Celulares (Abaixo de 600px) */
+        @media (max-width: 600px) {
+            .trust-container {
+                grid-template-columns: 1fr 1fr; /* 2 por linha no celular (2x2) */
+                gap: 15px; 
+            }
+            .trust-item {
+                border-bottom: none; /* Remove a borda vertical */
+                padding: 10px 0; 
+            }
+        }
 
         /* --- TOP BAR & TIMER --- */
         .top-bar {
@@ -194,7 +278,7 @@
             .sales-pop.active { transform: translateX(-50%) translateY(0); }
 	    .smart-sticky { display: flex; /* Mostra o botão apenas em telas menores que 768px */
 	    
-	 
+
 	    
 	       
 	    
@@ -598,18 +682,39 @@
     </section>
 
 
-    <section class="section">
-        <div class="container">
-            <div class="guarantee">
-                <div style="font-size: 3rem; margin-bottom: 10px;">🛡️</div>
-                <h3>Garantia Incondicional de 7 Dias</h3>
-                <p>Você tem 7 dias de garantia na compra dos pacotes.</p>
+<section class="trust-section">
+        <div class="trust-container">
+            
+            <div class="trust-item">
+                <i class="ph-fill ph-airplane-tilt trust-icon"></i>
+                <div class="trust-text">
+                    <strong>Envio Imediato</strong> após pagamento.
+                </div>
             </div>
+
+            <div class="trust-item">
+                <i class="ph-fill ph-shopping-cart trust-icon"></i>
+                <div class="trust-text">
+                    <strong>Compra Garantida</strong> com loja certificada SSL.
+                </div>
+            </div>
+
+            <div class="trust-item">
+                <i class="ph-fill ph-shield-check trust-icon"></i>
+                <div class="trust-text">
+                    <strong>Garantia incondicional</strong> de 7 dias ou seu dinheiro de volta.
+                </div>
+            </div>
+
+            <a href="https://wa.me/5516991724025" target="_blank" class="trust-item whatsapp-item">
+                <i class="ph-fill ph-whatsapp-logo trust-icon"></i>
+                <div class="trust-text">
+                    Dúvidas? Clique aqui e fale conosco.
+                </div>
+            </a>
+
         </div>
     </section>
-
-
-
 
 
 
