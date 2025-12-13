@@ -182,7 +182,7 @@
             max-width: 100%;
             box-shadow: none;
         }
-        .section { padding: 40px 0; }
+        .section { padding: 10px 0; }
         .bg-gray { background-color: var(--bg-light); }
         
         
@@ -210,7 +210,11 @@
         }
         .hero-sub { font-size: 1.25rem; color: var(--text-light); max-width: 700px; margin: 0 auto 40px; }
         
-        .mockup-container { margin-top: 50px; position: relative; z-index: 10; }
+        .mockup-container { margin: 50px auto 0 auto; /* Topo 50px, Lados Automáticos, Base 0 */
+    position: relative;
+    z-index: 10;
+    width: fit-content;       /* Ajusta a largura ao conteúdo do mockup */
+    max-width: 90%;           /* Evita que extrapole telas pequenas */ }
         .mockup {
             background: white; border-radius: 12px;
             box-shadow: 0 20px 40px -10px rgba(0,0,0,0.2);
@@ -321,21 +325,24 @@
             </div>
 
             <div class="hero-badge">Novo Lançamento 2026</div>
-            <h1>A Planilha que <span class="highlight">Automatiza Suas Tarefas</span><br> e Economiza 20h na Semana</h1>
-            <p class="hero-sub">O <strong>Dashboard de tarefas Pro 3.0</strong> faz o trabalho duro por você. Transforme listas de tarefas em gráficos e indicadores visuais que mostram a saúde das suas tarefas. Simples, visual e não exige conhecimento avançado.</p>
+            <h1>Gerencie <span class="highlight">suas Tarefas e Rotinas</span><br> e Economize 20h Semanais</h1>
+            <p class="hero-sub">Com o <strong>kit Executor 3.0</strong> você Transforma listas de tarefas em gráficos e indicadores visuais que mostram a saúde das suas tarefas além de ter o controle sobre seus compromissos. Simples, visual e sem complicação.</p>
             
             <a href="#ofertas" class="btn btn-pulse">Quero Meu Acesso</a>
             <p style="font-size: 0.85rem; color: #6B7280; margin-top: 10px;">🔒 Pagamento Único • Acesso Vitalício</p>
 
+           
             <div class="mockup-container">
                 <div class="mockup">
-                    <img src="https://cdn.shopify.com/s/files/1/0674/1314/7788/files/Executor.png" alt="Dashboard Preview">
+                    <img src="https://cdn.shopify.com/s/files/1/0674/1314/7788/files/planilha.jpg" alt="Dashboard Preview" alt="Dashboard Preview">
                 </div>
             </div>
         </div>
     </section>
+    
+    
 
-<div class="section bg-gray" style="padding: 20px 0; text-align: center;">
+        <div class="section bg-gray" style="padding: 20px 0; text-align: center;">
         <div class="container">
             <p style="font-size: 0.9rem; color: #414d61; text-transform: uppercase; letter-spacing: 1px;"><strong>Ferramenta utilizada por profissionais de:</strong></p>
             <div style="display: flex; justify-content: center; gap: 40px; margin-top: 15px; opacity: 0.6; flex-wrap: wrap;">
@@ -347,54 +354,57 @@
             </div>
         </div>
     </div>
+    
 
-   <section class="section">
-        <div class="container grid-2">
-            <div>
-                <h2>Sua Rotina Virou um Caos de Tarefas e Prazos Perdidos?</h2>
-                <p>Se você não tem um sistema para gerenciar suas tarefas e as da sua equipe, <strong>você está perdendo o controle e produtividade</strong>. Veja o custo real da desorganização:</p>
-                
-                <div class="problem-box"> <strong>❌ Seu dia hoje: Falta de Controle</strong> <ul style="margin-top: 10px;"> <li>• Tarefas prioritárias esquecidas;</li> <li>• Gasta horas para saber o que fazer;</li> <li>• Apagando incêndios e sem tempo para planejar;</li> <li>• Bônus do Caos: Estresse e dia caótico.</li> </ul> </div>
-
-<p>Chega de improvisos. Com o poder do nossa planilha de <strong>Plano de Ação e Agenda Pessoal</strong>, você organiza sua rotina e tarefas além de monitorar entregas e indicadores.</p>
-
-
-            </div>
-            <div>
-                <img src="https://cdn.shopify.com/s/files/1/0674/1314/7788/files/planilha.jpg" alt="Automação" style="border-radius: 12px; box-shadow: var(--shadow);">
-            </div>
+    
+    
+    <section class="section">
+    <div class="container grid-2">
+        
+       
+        
+        <div>
+            <h2 style="color: var(--primary-dark)">Sua Rotina Virou um Caos de Tarefas e Prazos Perdidos?</h2>
+            <p style="font-size: 1rem;color: var(--text-light);" >Se você não tem um sistema para gerenciar suas tarefas e as da sua equipe, <strong>você está perdendo o controle e produtividade</strong>. Veja o custo real da desorganização:</p>
+            <div class="problem-box"> <strong>❌ Seu dia hoje: Falta de Controle</strong> <ul style="margin-top: 10px;font-size: 1rem;color: var(--text-light);"> <li>• Tarefas prioritárias esquecidas;</li> <li>• Gasta horas para saber o que fazer;</li> <li>• Apagando incêndios e sem tempo para planejar;</li> <li>• Bônus do Caos: Estresse e dia caótico.</li> </ul> </div>
+            <p style="font-size: 1rem;color: var(--text-light);" >Chega de improvisos. Com o poder do nossa planilha de <strong>Plano de Ação e Agenda Pessoal</strong>, você organiza sua rotina e tarefas além de monitorar entregas e indicadores.</p>
         </div>
-    </section>
+         <div class="image-text-container" style="display: flex; flex-direction: column;">
+            <h2 style="color: var(--primary-dark)">Pacote Starter: Kit Executor 3</h2>
+            <p style="font-size: 0.9rem; color: var(--text-light);"> Confira abaixo as duas planilhas do seu <strong>Pacote Starter</strong>, além de um <strong>Planner Diário</strong> exclusivo para apoiar sua jornada.</p>
 
-  <section class="section bg-gray">
-        <div class="container">
-            <h2>O que está incluso no pacote?</h2>
-            <div class="features-grid">
-                <div class="feature-card">
-                    <div class="icon">🚀</div>
-                    <h3>Dashboard Automático</h3>
-                    <p>Basta preencher os dados brutos e os gráficos se atualizam sozinhos em tempo real.</p>
-                </div>
-                <div class="feature-card">
-                    <div class="icon">📱</div>
-                    <h3>Filtros Dinâmicos</h3>
-                    <p>Analise as informações realizando filtros do responsável pela ação, por setor e por mês</p>
-                </div>
-                <div class="feature-card">
-                    <div class="icon">🎨</div>
-                    <h3>Design Executivo</h3>
-                    <p>Layouts prontos para apresentação. Impressione seu chefe ou clientes na hora.</p>
-                </div>
+            <div style="display: flex; align-items: center; gap: 15px;">
+                <img src="https://thumbor.cartpanda.com/H6JTKIUZxEDptiAcwhJKD8Ie6vU=/768x768/https://assets.mycartpanda.com/static/products_images/18/c4/c7/1675516808.png" alt="Imagem 2" style="width: 50%; max-width: 150px; height: auto; border-radius: 12px; box-shadow: var(--shadow);">
+                <p style="font-size: 0.9rem; color: var(--text-light);">
+                    <strong>Dashboard Plano de Ação 3.0:</strong> Tenha suas tarefas planejadas e acompanhe diariamente seus os indicadores que vão ser fundamental para tomada de decisão.
+                </p>
             </div>
+            <div style="display: flex; align-items: center; gap: 15px;">
+                <img src="https://thumbor.cartpanda.com/epDsHx_fVXXBLW5OFtgLzrE_kMk=/768x768/https://assets.mycartpanda.com/static/products_images/aa/3f/9f/1675813693.png" alt="Imagem 1" style="width: 50%; max-width: 150px; height: auto; border-radius: 12px; box-shadow: var(--shadow);">
+                <p style="font-size: 0.9rem; color: var(--text-light);">
+                    <strong>Agenda pessoal 3.0:</strong> Tenha sua semana planejada, evitando surpresas e atrasos e monitore seus hábitos diários e indicadores como horas de sono, pesso, km corridos, etc.
+                </p>
+            
+            </div>
+            <p></p>
+            <p style="font-size: 0.9rem; color: var(--text-light);"><strong>Deseja ir além?</strong> Conheça também os pacotes <strong>Profissional</strong> e Master logo abaixo e escolha a melhor opção para você. </p>
+            
+            
         </div>
-    </section>
+        
+    </div>
+</section>
+    
+    
+    
 
 
 
 
 
 
-    <section class="section" id="oferta">
+
+    <section class="section" id="oferta" >
         <div class="container">
             <h2>Escolha o pacote ideal para você</h2>
             <p class="text-center" style="max-width: 600px; margin: 0 auto;">Invista uma vez, use para sempre. Sem mensalidades.</p>
@@ -523,7 +533,7 @@
     .premium-section-3 {
       font-family: 'Roboto', sans-serif;
       padding: 5px 0;
-      background-color: #fff;
+      background-color: radial-gradient(circle at 50% 0%, #ECFDF5 0%, #FFFFFF 60%) ;
       display: flex;
       justify-content: center;
     }
@@ -534,7 +544,7 @@
       display: grid;
       grid-template-columns: 1.2fr 1.8fr;
       gap: 30px;
-      background: #fff;
+      background: radial-gradient(circle at 50% 0%, #ECFDF5 0%, #FFFFFF 60%);
       border-radius: 30px;
     }
 
