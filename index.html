@@ -962,7 +962,10 @@ src="https://www.facebook.com/tr?id=364269819874714&ev=PageView&noscript=1"
             }, 1); 
         }
         
-        
+        window.addEventListener('pageshow', function(event) {
+            // Força o overlay a sumir sempre que a página for carregada ou restaurada
+            document.getElementById('loading-overlay').style.display = 'none';
+        });
         
         
         // NOVA FUNÇÃO: Calcula os segundos restantes até 00:00:00 do próximo dia
