@@ -206,6 +206,33 @@ src="https://www.facebook.com/tr?id=364269819874714&ev=PageView&noscript=1"
         .bg-gray { background-color: var(--bg-light); }
         
         
+        
+                /* --- PROGRESS BAR DE ROLAGEM (Reading Progress) --- */
+        .progress-container {
+            position: fixed;
+            top: 40px; /* Posiciona logo abaixo da .top-bar (40px) */
+            left: 0;
+            z-index: 1000;
+            width: 100%;
+            height: 4px; /* Altura da barra - muito fina */
+            background-color: #D1FAE5; /* Verde bem clarinho para o fundo */
+        }
+
+        .progress-bar {
+            height: 100%;
+            width: 0%; /* Inicialmente 0% */
+            background-color: var(--primary); /* Seu verde principal */
+            transition: width 0.1s ease-out; /* Transição suave para a rolagem */
+        }
+        
+        
+        
+        
+        
+        
+        
+        
+        
         /* --- HERO & PROVA SOCIAL --- */
         .hero { padding: 40px 0; text-align: center; background: radial-gradient(circle at 50% 0%, #ECFDF5 0%, #FFFFFF 60%);
         
@@ -313,7 +340,11 @@ src="https://www.facebook.com/tr?id=364269819874714&ev=PageView&noscript=1"
 <body>
 
     <div class="top-bar">
-        🔥 O desconto expira em <span style="color:#FCA5A5; font-family:monospace" id="timer">04:00:00</span>  🔥
+        🔥 O desconto expira em <span style="color:#FCA5A5; font-family:monospace" id="timer">24:00:00</span>  🔥
+    </div>
+    
+     <div class="progress-container">
+        <div class="progress-bar" id="progressBar"></div>
     </div>
 
     <div class="sales-pop" id="salesPop">
@@ -334,7 +365,7 @@ src="https://www.facebook.com/tr?id=364269819874714&ev=PageView&noscript=1"
                     <img src="https://i.pravatar.cc/100?img=12" alt="User">
                     <img src="https://i.pravatar.cc/100?img=15" alt="User">
                 </div>
-                <span>+1.200 downloads</span>
+                <span id="downloadCounter">+1.200 downloads</span>
                 <span style="
     color:var(--accent);
   
@@ -492,6 +523,8 @@ src="https://www.facebook.com/tr?id=364269819874714&ev=PageView&noscript=1"
                     </ul>
 
                     <a href="https://www.lojadasplanilhas.com.br/checkout/204334585:1" class="btn btn-pulse">Comprar Agora</a>
+                    
+                    <p style="text-align: center; font-size: 0.8rem; margin-top: 10px; color: var(--primary-dark);">⚡ 1<span id="salesCounter">...</span> pessoas compraram hoje</p>
 
                     <button class="btn-details-toggle">Ver mais detalhes</button>
                     <div class="details-content">
@@ -820,9 +853,184 @@ src="https://www.facebook.com/tr?id=364269819874714&ev=PageView&noscript=1"
                 if (--timer < 0) timer = duration;
             }, 1000);
         }
+        
+        
+        // NOVA FUNÇÃO: Calcula os segundos restantes até 00:00:00 do próximo dia
+function calculateSecondsUntilMidnight() {
+    const now = new Date();
+    
+    // Cria um objeto Date para a meia-noite de amanhã
+    const midnight = new Date(now);
+    midnight.setDate(now.getDate() + 1); // Avança para o dia seguinte
+    midnight.setHours(0, 0, 0, 0);       // Zera as horas, minutos, segundos e milissegundos
+    
+    // Calcula a diferença em milissegundos
+    const diffInMilliseconds = midnight.getTime() - now.getTime();
+    
+    // Converte para segundos e retorna
+    return Math.floor(diffInMilliseconds / 1000);
+}
+        
+        
+        // --- 1.1 DOWNLOADS CRESCIMENTO DINÂMICO ---
+function updateDownloadCount() {
+    // A. DEFINIÇÕES
+    const BASE_DOWNLOADS = 1200; // O valor base (ou o valor que estava no dia 01/12/25)
+    const DAILY_GROWTH = 3;     // O número de downloads a aumentar por dia
+    
+    // Data Base (01 de Dezembro de 2025)
+    // NOTE: Meses em JavaScript são baseados em zero (0 = Janeiro, 11 = Dezembro)
+    const BASE_DATE = new Date('2025-12-01T00:00:00'); 
+    
+    // Data Atual
+    const TODAY = new Date();
+    
+    // B. CÁLCULO DA DIFERENÇA
+    
+    // Calcula a diferença em milissegundos
+    const diffTime = TODAY.getTime() - BASE_DATE.getTime();
+    
+    // Converte milissegundos para dias. 
+    // 1000ms * 60s * 60m * 24h = Milissegundos em um dia (86.400.000)
+    const diffDays = Math.floor(diffTime / (1000 * 60 * 60 * 24));
+    
+    // Se a data atual for anterior à data base, usamos 0 dias
+    const daysPassed = Math.max(0, diffDays);
+
+    // C. CÁLCULO FINAL DO TOTAL
+    
+    // Downloads gerados = dias passados * crescimento diário
+    const generatedDownloads = daysPassed * DAILY_GROWTH;
+    
+    // Novo total de downloads
+    const totalDownloads = BASE_DOWNLOADS + generatedDownloads;
+    
+    // Formata o número (ex: 1200 -> 1.200)
+    const formattedTotal = totalDownloads.toLocaleString('pt-BR');
+    
+    // D. ATUALIZAÇÃO DO ELEMENTO
+    const counterElement = document.querySelector('#downloadCounter');
+    if (counterElement) {
+        // Exibe o novo valor, mantendo o "+ " e a palavra " downloads"
+        counterElement.textContent = `+${formattedTotal} downloads`;
+    }
+}
+        
+        
+        
+       // --- 3. CONTADOR DE VENDAS DINÂMICO (Incremento a cada 4 horas) ---
+
+// Variável global para armazenar o contador atual
+let dynamicSalesCount = 0; 
+
+function getRandomInt(min, max) {
+    // Retorna um número inteiro aleatório entre min (incluído) e max (incluído)
+    return Math.floor(Math.random() * (max - min + 1)) + min;
+}
+
+function updateSalesDisplay() {
+    // Função para formatar e exibir o valor atual
+    const counterElement = document.querySelector('#salesCounter'); // Use um ID específico no seu HTML
+    if (counterElement) {
+        // Exibe o número formatado (ex: 1250 -> 1.250)
+        counterElement.textContent = dynamicSalesCount.toLocaleString('pt-BR'); 
+    }
+}
+
+function startDynamicSalesCounter() {
+    // 1. CALCULAR O VALOR BASE PARA HOJE
+    // O valor base inicial (deve ser diferente a cada dia)
+    const BASE_START_VALUE = getRandomInt(0, 2); 
+    dynamicSalesCount = BASE_START_VALUE;
+    updateSalesDisplay();
+    
+    // 2. CONFIGURAR O CÁLCULO DOS INCREMENTOS
+    
+    // Tempo em milissegundos para 4 horas (4 * 60 minutos * 60 segundos * 1000 milissegundos)
+    const INTERVAL_MS = 4 * 60 * 60 * 1000; 
+    
+    // Intervalo de tempo para o incremento aleatório (1 a 7)
+    const MIN_INCREMENT = 1;
+    const MAX_INCREMENT = 7;
+
+    // Configura o intervalo para rodar a cada 4 horas
+    setInterval(() => {
+        // Gera um incremento aleatório
+        const increment = getRandomInt(MIN_INCREMENT, MAX_INCREMENT);
+        
+        // Adiciona o incremento ao contador
+        dynamicSalesCount += increment;
+        
+        // Atualiza a exibição no site
+        updateSalesDisplay();
+        
+    }, INTERVAL_MS);
+    
+    // 3. CONFIGURAR O REINÍCIO DIÁRIO (PARA MUDAR O VALOR BASE)
+    
+    // Tempo até a próxima meia-noite (reutilizando a lógica do contador de tempo)
+    const timeUntilMidnight = calculateMillisecondsUntilMidnight();
+
+    // Configura um timeout para reinicar o contador exatamente à meia-noite
+    setTimeout(() => {
+        // Recarrega a página ou chama a função novamente para reiniciar o ciclo
+        // Neste exemplo, vamos apenas reiniciar o processo
+        startDynamicSalesCounter();
+    }, timeUntilMidnight);
+
+    // FUNÇÃO AUXILIAR (A mesma que usamos no timer, mas retorna milissegundos)
+    function calculateMillisecondsUntilMidnight() {
+        const now = new Date();
+        const midnight = new Date(now);
+        midnight.setDate(now.getDate() + 1);
+        midnight.setHours(0, 0, 0, 0);
+        return midnight.getTime() - now.getTime();
+    }
+} 
+        
+        
+        
+    
+        
+        
+        
+        
+        
+        
         window.onload = function () {
-            startTimer(4 * 60 * 60, document.querySelector('#timer'));
+            // 1. Calcula o tempo restante exato para o final do dia (meia-noite)
+    const secondsRemaining = calculateSecondsUntilMidnight();
+            
+            
+           // 2. Inicia o timer com o tempo calculado
+    startTimer(secondsRemaining, document.querySelector('#timer'));
+    
+     updateProgressBar(); // Chama a função da barra de progresso no load
+    updateDownloadCount();
+    startDynamicSalesCounter();
+    
         };
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
         // --- 2. SMART STICKY CTA (SCROLL) ---
         const stickyCta = document.getElementById('stickyCta');
@@ -831,8 +1039,37 @@ src="https://www.facebook.com/tr?id=364269819874714&ev=PageView&noscript=1"
                 stickyCta.classList.add('visible');
             } else {
                 stickyCta.classList.remove('visible');
+                
             }
+            updateProgressBar(); // Atualiza a barra de progresso a cada rolagem
         });
+        
+        
+        // 3. PROGRESS BAR DE ROLAGEM
+        function updateProgressBar() {
+            const progressBar = document.getElementById('progressBar');
+            // document.documentElement.scrollHeight pega o valor correto em mais browsers
+            const totalHeight = document.documentElement.scrollHeight - window.innerHeight;
+            
+            if (totalHeight > 0) { // Evita divisão por zero
+                const scrolled = window.scrollY;
+                const progress = (scrolled / totalHeight) * 100;
+                progressBar.style.width = progress + '%';
+            }
+        }
+        // Adiciona o listener para o evento de rolagem, já incluso no ponto 2.
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
 
         // --- 3. SALES NOTIFICATIONS ---
         const names = ["Ricardo S.", "Ana Paula", "Marcos V.", "Júlia T.", "Fernando C.", "Patrícia L.", "Gustavo H.", "Maria L.", "Rodrigo O.", "Camila P.", "Rafael D.", "Bianca M.", "André B.", "Sofia E.", "Pedro N.", "Larissa F.", "Guilherme J.", "Manuela Q.", "Alexandre K.", "Isabela R.", "Felipe A.", "Vitória Z.", "Daniel G.", "Helena W.", "Lucas X.", "Giovana Y.", "Eduardo I.", "Carolina U.", "Thiago S.", "Clara V."];
