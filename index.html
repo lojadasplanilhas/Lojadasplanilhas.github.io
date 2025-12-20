@@ -1058,18 +1058,18 @@ function updateSalesDisplay() {
 function startDynamicSalesCounter() {
     // 1. CALCULAR O VALOR BASE PARA HOJE
     // O valor base inicial (deve ser diferente a cada dia)
-    const BASE_START_VALUE = getRandomInt(0, 2); 
+    const BASE_START_VALUE = getRandomInt(1, 5); 
     dynamicSalesCount = BASE_START_VALUE;
     updateSalesDisplay();
     
     // 2. CONFIGURAR O CÁLCULO DOS INCREMENTOS
     
     // Tempo em milissegundos para 4 horas (4 * 60 minutos * 60 segundos * 1000 milissegundos)
-    const INTERVAL_MS = 4 * 60 * 60 * 1000; 
+    const INTERVAL_MS = 1 * 60 * 60 * 1000; 
     
     // Intervalo de tempo para o incremento aleatório (1 a 7)
     const MIN_INCREMENT = 1;
-    const MAX_INCREMENT = 7;
+    const MAX_INCREMENT = 30;
 
     // Configura o intervalo para rodar a cada 4 horas
     setInterval(() => {
