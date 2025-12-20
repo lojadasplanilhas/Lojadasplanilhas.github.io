@@ -16,7 +16,12 @@ n.queue=[];t=b.createElement(e);t.async=!0;
 t.src=v;s=b.getElementsByTagName(e)[0];
 s.parentNode.insertBefore(t,s)}(window, document,'script',
 'https://connect.facebook.net/en_US/fbevents.js');
-fbq('init', '364269819874714');
+fbq('init', '364269819874714', {
+  em: 'email@email.com',   // Values will be hashed automatically by the pixel using SHA-256
+  ph: '1234567890',
+  fn: 'first_name', 
+  ...
+});
 fbq('track', 'PageView');
 </script>
 <noscript><img height="1" width="1" style="display:none"
