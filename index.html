@@ -424,7 +424,7 @@ src="https://www.facebook.com/tr?id=364269819874714&ev=PageView&noscript=1"
                     <img src="https://i.pravatar.cc/100?img=8" alt="User">
                     <img src="https://i.pravatar.cc/100?img=5" alt="User">
                     <img src="https://i.pravatar.cc/100?img=12" alt="User">
-                    <img src="https://i.pravatar.cc/100?img=15" alt="User">
+                    <img src="https://i.pravatar.cc/100?img=16" alt="User">
                 </div>
                 <span id="downloadCounter">+1.200 downloads</span>
                 <span style="
@@ -597,7 +597,7 @@ src="https://www.facebook.com/tr?id=364269819874714&ev=PageView&noscript=1"
 
                     <button class="btn btn-secondary" onclick="iniciarRedirecionamento('https://www.lojadasplanilhas.com.br/checkout/204334585:1')">Comprar Agora</button>
                     
-                    <p style="text-align: center; font-size: 0.8rem; margin-top: 10px; color: var(--primary-dark);">⚡ 1<span id="salesCounter"></span> pessoas compraram hoje</p>
+                    <p style="text-align: center; font-size: 0.8rem; margin-top: 10px; color: var(--primary-dark);">⚡ 1<span id="valor"></span> pessoas compraram hoje</p>
 
                     <button class="btn-details-toggle">Ver mais detalhes</button>
                     <div class="details-content">
@@ -1048,7 +1048,7 @@ function getRandomInt(min, max) {
 
 function updateSalesDisplay() {
     // Função para formatar e exibir o valor atual
-    const counterElement = document.querySelector('#salesCounter'); // Use um ID específico no seu HTML
+    const counterElement = document.querySelector('#valor'); // Use um ID específico no seu HTML
     if (counterElement) {
         // Exibe o número formatado (ex: 1250 -> 1.250)
         counterElement.textContent = dynamicSalesCount.toLocaleString('pt-BR'); 
@@ -1065,11 +1065,11 @@ function startDynamicSalesCounter() {
     // 2. CONFIGURAR O CÁLCULO DOS INCREMENTOS
     
     // Tempo em milissegundos para 4 horas (4 * 60 minutos * 60 segundos * 1000 milissegundos)
-    const INTERVAL_MS = 1 * 60 * 60 * 1000; 
+    const INTERVAL_MS = 4 * 60 * 60 * 1000; 
     
     // Intervalo de tempo para o incremento aleatório (1 a 7)
-    const MIN_INCREMENT = 1;
-    const MAX_INCREMENT = 30;
+    const MIN_INCREMENT = 5;
+    const MAX_INCREMENT = 20;
 
     // Configura o intervalo para rodar a cada 4 horas
     setInterval(() => {
