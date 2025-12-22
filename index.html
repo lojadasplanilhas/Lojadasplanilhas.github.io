@@ -35,6 +35,8 @@ src="https://www.facebook.com/tr?id=364269819874714&ev=PageView&noscript=1"
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700;900&display=swap" rel="stylesheet">
     <script src="https://unpkg.com/@phosphor-icons/web"></script>
+    
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 
     <style>
         /* --- RESET & VARIAVEIS GERAIS --- */
@@ -208,7 +210,7 @@ src="https://www.facebook.com/tr?id=364269819874714&ev=PageView&noscript=1"
             box-shadow: none;
         }
         .section { padding: 10px 0; }
-        .bg-gray { background-color: var(--bg-light); }
+        .bg-gray { background-color: #ccebe6; }
         
         
         
@@ -264,6 +266,28 @@ src="https://www.facebook.com/tr?id=364269819874714&ev=PageView&noscript=1"
             margin-top: 15px; /* Espaço após o texto de agradecimento */
             margin-bottom: 20px; /* Espaço antes do próximo elemento (se houver) */
         }
+        
+        
+        
+
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
         
         
         
@@ -353,8 +377,7 @@ src="https://www.facebook.com/tr?id=364269819874714&ev=PageView&noscript=1"
         .faq-answer { display: none; margin-top: 15px; color: var(--text-light); }
         .faq-item.active .faq-answer { display: block; }
         .guarantee { background: #fff; border: 2px dashed var(--secondary); padding: 40px; border-radius: var(--radius-card); text-align: center; max-width: 800px; margin: 0 auto; }
-        footer { background: var(--secondary); color: white; padding: 50px 0; text-align: center; font-size: 0.9rem; }
-        footer a { color: #9CA3AF; }
+       
 
         @media (max-width: 768px) {
             h1 { font-size: 2rem; }
@@ -450,10 +473,10 @@ src="https://www.facebook.com/tr?id=364269819874714&ev=PageView&noscript=1"
     
     
 
-        <div class="section bg-gray" style="padding: 20px 0; text-align: center;">
+        <div class="section bg-gray" style="padding: 20px 0; text-align: center ;">
         <div class="container">
             <p style="font-size: 0.9rem; color: #414d61; text-transform: uppercase; letter-spacing: 1px;"><strong>Ferramenta utilizada por profissionais de:</strong></p>
-            <div style="display: flex; justify-content: center; gap: 40px; margin-top: 15px; opacity: 0.6; flex-wrap: wrap;">
+            <div style="display: flex; justify-content: center; gap: 20px; margin-top: 15px; opacity: 0.6; flex-wrap: wrap;">
                 
                 <span>📈 Gestão de Equipe</span>
                 <span>💼 Consultoria</span>
@@ -896,17 +919,243 @@ src="https://www.facebook.com/tr?id=364269819874714&ev=PageView&noscript=1"
 
 
 
-    <footer>
-        <div class="container">
-            <p>Copyright © 2026 Loja das Planilhas. Todos os direitos reservados.</p>
-            <p style="margin-top: 10px; font-size: 0.8rem;">
-                <a href="https://www.lojadasplanilhas.com.br/policies/terms-policy">Termos de Uso</a> | <a href="https://www.lojadasplanilhas.com.br/policies/privacy-policy">Política de Privacidade</a>
-            </p>
-            <p style="margin-top: 10px; font-size: 0.8rem;">
-                CNPJ: 37.863.199/0001-91
-            </p>
+<footer class="site-footer">
+    
+    
+    <style>
+        /* Estilos de Reset para o teste */
+      
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+        }
+
+        .conteudo-pagina {
+            flex: 1;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background-color: #f4f7f6;
+            color: #666;
+        }
+
+        /* --- ESTILOS DO FOOTER --- */
+        .site-footer {
+            background-color: #1a252f; /* Azul Marinho Escuro */
+            color: #ffffff;
+            padding: 50px 0 20px;
+            font-size: 15px;
+        }
+
+        .container {
+            max-width: 1100px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        .footer-grid {
+            display: grid;
+            grid-template-columns: 2fr 1fr 1fr 1.5fr; /* Colunas desiguais */
+            gap: 40px;
+        }
+
+        /* Coluna da Logo e Descrição */
+        .footer-brand .logo-placeholder {
+            font-size: 24px;
+            font-weight: bold;
+            color: #27ae60; /* Verde Excel */
+            margin-bottom: 15px;
+            display: block;
+            text-decoration: none;
+        }
+
+        .footer-brand p {
+            color: #bdc3c7;
+            line-height: 1.6;
+            margin-bottom: 20px;
+        }
+
+        /* Títulos das Colunas */
+        .footer-heading {
+            font-size: 18px;
+            font-weight: 600;
+            margin-bottom: 25px;
+            color: #fff;
+            position: relative;
+        }
+
+        .footer-heading::after {
+            content: '';
+            position: absolute;
+            left: 0;
+            bottom: -8px;
+            width: 30px;
+            height: 2px;
+            background-color: #27ae60;
+        }
+
+        /* Listas de Links */
+        .footer-links {
+            list-style: none;
+        }
+
+        .footer-links li {
+            margin-bottom: 12px;
+        }
+
+        .footer-links a {
+            color: #bdc3c7;
+            text-decoration: none;
+            transition: all 0.3s ease;
+        }
+
+        .footer-links a:hover {
+            color: #27ae60;
+            padding-left: 5px;
+        }
+
+        /* Redes Sociais */
+        .social-icons {
+            display: flex;
+            gap: 15px;
+        }
+
+        .social-icons a {
+            width: 38px;
+            height: 38px;
+            background-color: rgba(255,255,255,0.08);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 50%;
+            color: #fff;
+            text-decoration: none;
+            transition: 0.3s;
+        }
+
+        .social-icons a:hover {
+            background-color: #27ae60;
+            transform: translateY(-3px);
+        }
+
+        /* Informações de Contato */
+        .contact-info p {
+            color: #bdc3c7;
+            margin-bottom: 10px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .contact-info i {
+            color: #27ae60;
+        }
+
+        /* Linha Final */
+        .footer-bottom {
+            margin-top: 50px;
+            padding-top: 20px;
+            border-top: 1px solid rgba(255,255,255,0.1);
+            text-align: center;
+            color: #7f8c8d;
+            font-size: 13px;
+        }
+
+        /* Responsividade */
+        @media (max-width: 900px) {
+            .footer-grid {
+                grid-template-columns: 1fr 1fr;
+            }
+        }
+
+        @media (max-width: 500px) {
+            .footer-grid {
+                grid-template-columns: 1fr;
+            }
+            .site-footer {
+                text-align: center;
+            }
+            .footer-heading::after {
+                left: 50%;
+                transform: translateX(-50%);
+            }
+            .social-icons {
+                justify-content: center;
+            }
+        }
+    </style>
+    
+    
+     <div class="container">
+            <div class="footer-grid">
+                
+                <div class="footer-brand">
+                    <a href="https://www.lojadasplanilhas.com.br/" class="logo-placeholder">
+                        <i class="fas fa-file-excel"></i> Loja das Planilhas
+                    </a>
+                    <p>Transformamos dados em decisões. Planilhas profissionais para gestão empresarial e pessoal.</p>
+                    <div class="social-icons">
+                        <a href="https://www.instagram.com/lojadasplanilhas/" title="Instagram"><i class="fab fa-instagram"></i></a>
+                        <a href="https://br.linkedin.com/company/lojadasplanilhas" title="LinkedIn"><i class="fab fa-linkedin-in"></i></a>
+                        <a href="https://wa.me/5516991724025" title="WhatsApp"><i class="fab fa-whatsapp"></i></a>
+                    </div>
+                </div>
+
+                <div>
+                    <h3 class="footer-heading">Loja</h3>
+                    <ul class="footer-links">
+                        <li><a href="https://www.lojadasplanilhas.com.br/">Página Inicial</a></li>
+                        
+                        <li><a href="https://www.lojadasplanilhas.com.br/collections/planilhas-prontas-em-excel">Todas as Planilhas</a></li>
+                        <li><a href="https://www.lojadasplanilhas.com.br/collections/todos-os-produtos">Todos os produtos</a></li>
+                        <li><a href="https://www.lojadasplanilhas.com.br/collections/pacote-de-arquivos">Todos os Pacotes</a></li>
+                        
+                    </ul>
+                </div>
+
+                <div>
+                    <h3 class="footer-heading">Suporte</h3>
+                    <ul class="footer-links">
+                        <li><a href="https://www.lojadasplanilhas.com.br/policies/terms-policy">Termos de Uso</a></li>
+                        <li><a href="https://www.lojadasplanilhas.com.br/policies/privacy-policy">Privacidade</a></li>
+        
+                        <li><a href="https://www.lojadasplanilhas.com.br/account/login">Minha Conta</a></li>
+                    </ul>
+                </div>
+
+                <div class="contact-info">
+                    <h3 class="footer-heading">Contato</h3>
+                    <p><i class="fas fa-envelope"></i> contato@lojadasplanilhas.com.br</p>
+                    <p><i class="fas fa-map-marker-alt"></i> Ribeirão Preto - SP</p>
+                    <p><i class="fas fa-id-card"></i> CNPJ: 37.863.199/0001-91</p>
+                </div>
+
+            </div>
+
+            <div class="footer-bottom">
+                <p>&copy; 2026 Loja das Planilhas. Todos os direitos reservados.</p>
+            </div>
         </div>
     </footer>
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+
+
+
+
+
 
     <div class="smart-sticky" id="stickyCta">
         <div class="sticky-info">
